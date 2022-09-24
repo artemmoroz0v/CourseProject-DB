@@ -2,7 +2,8 @@
 
 ## Готово:
 
-* Схема базы данных
+* [Схема базы данных](https://github.com/papey08/DB/blob/main/FitnessClubScheme.vsdx)
+* Таблица Program
 
 ## В процессе:
 
