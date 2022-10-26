@@ -35,7 +35,7 @@ CREATE TABLE "Program" (
 
 CREATE TABLE "Group" (
     "group_id" serial NOT NULL,
-    "program_id" varchar(50) NOT NULL,
+    "program_id" integer NOT NULL,
     "notes" varchar(255) NOT NULL,
     "trainer_id" integer NOT NULL,
     "clients_amount" integer NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE "Times" (
     "time_id" serial NOT NULL,
     "weekday" integer NOT NULL,
     "training_time" TIME NOT NULL,
+    "program_id" integer NOT NULL,
     CONSTRAINT "Times_pk" PRIMARY KEY ("time_id")
 );
-
 
