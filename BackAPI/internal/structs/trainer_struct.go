@@ -6,5 +6,4 @@ type Trainer struct {
 	TrainerName       string `json:"trainerName"`
 	TrainerThirdName  string `json:"trainerThirdName"`
 	TrainerPhone      string `json:"trainerPhone"`
-	Speciality        string `json:"speciality"`
 }
