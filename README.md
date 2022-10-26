@@ -27,6 +27,11 @@
 * Страница с секциями
 * Страница админа
 
+## Схема базы данных
+
+![image](https://github.com/papey08/DB/blob/main/DBscheme.png)
+
+
 ## Таблицы
 
 ### Client
