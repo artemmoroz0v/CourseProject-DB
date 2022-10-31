@@ -1,4 +1,4 @@
-INSERT INTO "Program" ("program_name")
+INSERT INTO Program (program_name)
 VALUES
     ('Танцы'),
     ('Тяжёлая атлетика'),

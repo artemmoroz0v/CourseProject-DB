@@ -1,4 +1,4 @@
-INSERT INTO "Times" (weekday, training_time, program_id)
+INSERT INTO Times (weekday, training_time, program_id)
 VALUES
     (1, '16:30', 1),
     (1, '18:15', 1),
