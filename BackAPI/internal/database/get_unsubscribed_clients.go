@@ -2,6 +2,7 @@ package database
 
 import (
 	s "BackAPI/internal/structs"
+	"database/sql"
 	"log"
 )
 
@@ -10,8 +11,13 @@ func GetUnsubscribedClients() []s.Client {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer rows.Close()
-	clients := []s.Client{}
+	defer func(rows *sql.Rows) {
+		err = rows.Close()
+		if err != nil {
+
+		}
+	}(rows)
+	var clients []s.Client
 	for rows.Next() {
 		temp := s.Client{}
 		err = rows.Scan(&temp.SubscriptionID, &temp.ClientSecondName, &temp.ClientName, &temp.ClientThirdName, &temp.Sex, &temp.Birthdate, &temp.Height, &temp.Weight, &temp.SubscriptionBegin, &temp.SubscriptionEnd)
