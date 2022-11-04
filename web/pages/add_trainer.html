@@ -9,10 +9,11 @@
   <title>Fitness Club Admin Page</title>
 </head>
 <body>
-  <h1>Добавление клиента</h1>
-  <form action="" method="post">
+  <h1>Добавление тренера</h1>
+  <form action="http://localhost:8080/post_trainer" method="post">
     <label>Фамилия</label>
     <input type="text"
+           name="trainer_second_name"
            id="trainer_second_name"
            class="add_trainer"
            maxlength="50">
@@ -21,6 +22,7 @@
 
     <label>Имя</label>
     <input type="text"
+           name="trainer_name"
            id="trainer_name"
            class="add_trainer"
            maxlength="50">
@@ -29,6 +31,7 @@
 
     <label>Отчество</label>
     <input type="text"
+           name="trainer_third_name"
            id="trainer_third_name"
            class="add_trainer"
            maxlength="50">
@@ -37,13 +40,14 @@
 
     <label>Телефон</label>
     <input type="text"
+           name="trainer_phone"
            id="trainer_phone"
            class="add_trainer"
            maxlength="20">
 
     <br>
 
-    <input type="submit" 
+    <input type="submit"
            value="Добавить тренера"
            id="trainer_submit"
            class="add_trainer">
