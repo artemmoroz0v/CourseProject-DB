@@ -3,7 +3,7 @@
 ## Готово
 
 * [Схема базы данных](https://dbdesigner.page.link/aBsVD7ALiKRhvowr8)
-* [Созданы и заполнены все таблицы](https://github.com/papey08/DB/tree/main/FitnessClub/create_fill_tables.sql)
+* [Созданы и заполнены все таблицы](https://github.com/papey08/DB/blob/main/create_fill_tables.sql)
 * Добавление клиента из сайта
 * Добавление тренера из сайта
 
