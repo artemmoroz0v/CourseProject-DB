@@ -1,98 +1,75 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles/main.css">
-  
-  <title>Fitness Club Admin Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/main.css">
+
+    <title>Fitness Club Admin Page</title>
 </head>
+
 <body>
-  <h1>Добавление клиента</h1>
-  <form action="http://localhost:8080/post_client" method="post">
-    
-    <label>Фамилия</label>
-    <input type="text"
-           name="client_second_name"
-           id="client_second_name" 
-           class="add_client"
-           maxlength="50">
+    <h1>Добавление клиента</h1>
+    <form action="http://localhost:8080/post_client" method="post">
 
-    <br>
-           
-    <label>Имя</label>
-    <input type="text"
-           name="client_name"
-           id="client_name"
-           class="add_client"
-           maxlength="50">
+        <label>Фамилия</label>
+        <input type="text" name="client_second_name" id="client_second_name" class="add_client" maxlength="50">
 
-    <br>
+        <br>
 
-    <label>Отчество</label>
-    <input type="text"
-           name="client_third_name"
-           id="client_third_name"
-           class="add_client"
-           maxlength="50">
+        <label>Имя</label>
+        <input type="text" name="client_name" id="client_name" class="add_client" maxlength="50">
 
-    <br>
+        <br>
 
-    <label>Пол</label>
-    <input type="text"
-           name="sex"
-           id="sex"
-           class="add_client"> 
+        <label>Отчество</label>
+        <input type="text" name="client_third_name" id="client_third_name" class="add_client" maxlength="50">
 
-    <br>
+        <br>
 
-    <label>Дата рождения</label>
-    <input type="date"
-           name="birthdate"
-           id="birthdate"
-           class="add_client">
+        <label>Пол</label>
+        <input type="radio" id="contactChoice1" name="contact" value="male">
+        <label for="contactChoice1">мужской</label>
 
-    <br>
+        <input type="radio" id="contactChoice2" name="contact" value="female">
+        <label for="contactChoice2">женский</label>
 
-    <label>Рост</label>
-    <input type="number"
-           name="height"
-           id="height"
-           class="add_client">
+        <input type="radio" id="contactChoice3" name="contact" value="other">
+        <label for="contactChoice3">другое</label>
 
-    <br>
+        <br>
 
-    <label>Вес</label>
-    <input type="number"
-           name="weight"
-           id="weight"
-           class="add_client">
+        <label>Дата рождения</label>
+        <input type="date" name="birthdate" id="birthdate" class="add_client">
 
-    <br>
+        <br>
 
-    <label>Начало подписки</label>
-    <input type="date"
-           name="subscription_begin"
-           id="subscription_begin"
-           class="add_client">
-    
-    <br>
+        <label>Рост</label>
+        <input type="number" name="height" id="height" class="add_client">
 
-    <label>Окончание подписки</label>
-    <input type="date"
-           name="subscription_end"
-           id="subscription_end"
-           class="add_client">
+        <br>
 
-    <br>
+        <label>Вес</label>
+        <input type="number" name="weight" id="weight" class="add_client">
 
-    <input type="submit" 
-           value="Добавить клиента"
-           id="client_submit"
-           class="add_client">
-           
-  </form>
-  
+        <br>
+
+        <label>Начало подписки</label>
+        <input type="date" name="subscription_begin" id="subscription_begin" class="add_client">
+
+        <br>
+
+        <label>Окончание подписки</label>
+        <input type="date" name="subscription_end" id="subscription_end" class="add_client">
+
+        <br>
+
+        <input type="submit" value="Добавить клиента" id="client_submit" class="add_client">
+
+    </form>
+
 </body>
+
 </html>
