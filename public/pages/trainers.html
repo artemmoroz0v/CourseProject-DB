@@ -1,0 +1,73 @@
+{{ define "trainers" }}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--  <link rel="stylesheet" href="../styles/main.css">-->
+  
+  <title>Fitness Club Admin Page</title>
+</head>
+<body>
+  <h1>Добавление тренера</h1>
+  <form action="http://localhost:8080/trainer/post" method="post">
+
+    <label for="trainer_second_name">Фамилия</label>
+    <input type="text"
+           name="trainer_second_name"
+           id="trainer_second_name"
+           class="add_trainer"
+           maxlength="50">
+
+    <br>
+
+    <label for="trainer_name">Имя</label>
+    <input type="text"
+           name="trainer_name"
+           id="trainer_name"
+           class="add_trainer"
+           maxlength="50">
+
+    <br>
+
+    <label for="trainer_third_name">Отчество</label>
+    <input type="text"
+           name="trainer_third_name"
+           id="trainer_third_name"
+           class="add_trainer"
+           maxlength="50">
+
+    <br>
+
+    <label for="trainer_phone">Телефон</label>
+    <input type="text"
+           name="trainer_phone"
+           id="trainer_phone"
+           class="add_trainer"
+           maxlength="20">
+
+    <br>
+
+    <input type="submit"
+           value="Добавить тренера"
+           id="trainer_submit"
+           class="add_trainer">
+           
+  </form>
+
+
+  {{ range . }}
+  <p>
+    {{ .TrainerID }}
+    {{ .TrainerSecondName }}
+    {{ .TrainerName }}
+    {{ .TrainerThirdName }}
+    {{ .TrainerPhone }}
+  </p>
+  <br>
+  {{ end }}
+  
+</body>
+</html>
+{{end}}

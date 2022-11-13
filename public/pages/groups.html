@@ -1,0 +1,82 @@
+{{ define "groups"}}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/main.css">
+
+  <title>Fitness Club Admin Page</title>
+</head>
+
+<body>
+  <h1>Добавление группы</h1>
+  <form action="http://localhost:8080/group/post" method="post">
+    <p>
+      <label for="group_program_list">Программа</label>
+      <select name="program_list"
+              required id="group_program_list"
+              class="add_group">
+        <option></option>
+        <option>Танцы</option>
+        <option>Тяжёлая атлетика</option>
+        <option>Кроссфит</option>
+        <option>Бассейн</option>
+        <option>Кардиотренировка</option>
+        <option>Боевые искусства</option>
+        <option>Игровые программы</option>
+        <option>Детский фитнес</option>
+      </select>
+
+      <br>
+
+      <label for="group_note">Заметки</label>
+      <input type="text"
+             name="notes"
+             id="group_note"
+             class="add_group"
+             maxlength="255">
+
+      <br>
+
+      <label for="group_trainer_id">Тренер</label>
+      <input type="number"
+             name="trainer"
+             id="group_trainer_id"
+             class="add_group">
+
+      <br>
+
+      <label for="group_clients_amount">Максимальное количество клиентов</label>
+      <input type="number"
+             name="clients_amount"
+             id="group_clients_amount"
+             class="add_group">
+
+      <br>
+
+      <input type="submit"
+             value="Добавить группу"
+             id="group_submit"
+             class="add_group">
+
+  </form>
+
+  {{ range . }}
+  <p>
+    {{ .GroupID }}
+    {{ .ProgramID }}
+    {{ .Notes }}
+    {{ .TrainerID }}
+    {{ .ClientsAmount }}
+  </p>
+  <br>
+  {{ end }}
+
+
+</body>
+
+</html>
+{{ end }}
