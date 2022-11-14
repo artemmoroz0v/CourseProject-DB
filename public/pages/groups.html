@@ -1,4 +1,5 @@
 {{ define "groups"}}
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -12,7 +13,9 @@
 </head>
 
 <body>
-  <h1>Добавление группы</h1>
+  <h1>Управление группами</h1>
+
+  <h2>Добавление группы</h2>
   <form action="http://localhost:8080/group/post" method="post">
     <p>
       <label for="group_program_list">Программа</label>
@@ -64,19 +67,24 @@
 
   </form>
 
-  {{ range . }}
-  <p>
-    {{ .GroupID }}
-    {{ .ProgramID }}
-    {{ .Notes }}
-    {{ .TrainerID }}
-    {{ .ClientsAmount }}
-  </p>
-  <br>
-  {{ end }}
+  <table class="table">
+    <th>ID группы</th>
+    <th>ID программы</th>
+    <th>Заметки</th>
+    <th>ID тренера</th>
+    <th>Макс. кол-во клиентов</th>
 
+    {{ range . }}
+    <tr>
+      <td>{{ .GroupID }}</td>
+      <td>{{ .ProgramID }}</td>
+      <td>{{ .Notes }}</td>
+      <td>{{ .TrainerID }}</td>
+      <td>{{ .ClientsAmount }}</td>
+    </tr>
+    {{ end }}
+  </table>
 
 </body>
-
 </html>
 {{ end }}
