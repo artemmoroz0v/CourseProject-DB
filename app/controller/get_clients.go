@@ -2,7 +2,6 @@ package controller
 
 import (
 	"DB/app/model"
-	"DB/app/server"
 	"github.com/julienschmidt/httprouter"
 	"html/template"
 	"net/http"
@@ -10,8 +9,8 @@ import (
 )
 
 func GetClients(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	clients, err := server.SelectClients()
-	unsubscribedClients, err := server.SelectUnsubscribedClients()
+	clients, err := clients.SelectClients()
+	unsubscribedClients, err := clients.SelectUnsubscribedClients()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

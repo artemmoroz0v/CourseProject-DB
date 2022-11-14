@@ -2,7 +2,6 @@ package controller
 
 import (
 	"DB/app/model"
-	"DB/app/server"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
@@ -19,7 +18,7 @@ func PostClient(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	//newClient.Weight = r.FormValue("weight")
 	//newClient.SubscriptionBegin = r.FormValue("subscription_begin")
 	//newClient.SubscriptionEnd = r.FormValue("subscription_end")
-	err := server.InsertNewClient(newClient)
+	err := clients.InsertNewClient(newClient)
 	if err != nil {
 		log.Fatal(err)
 	}
