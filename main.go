@@ -10,7 +10,7 @@ import (
 )
 
 func routes(r *httprouter.Router) {
-	r.ServeFiles("/public/*filepath", http.Dir("/public"))
+	r.ServeFiles("/public/*filepath", http.Dir("public"))
 
 	r.GET("/", controller.StartPage)
 
