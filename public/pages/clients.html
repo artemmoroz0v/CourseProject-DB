@@ -16,7 +16,7 @@
   <h1>Управление клиентами</h1>
 
   <h2>Добавление клиента</h2>
-  <form action="http://localhost:8080/post_client" method="post">
+  <form action="http://localhost:8080/client/post" method="post">
 
     <label for="client_second_name">Фамилия</label>
     <input type="text"
@@ -47,22 +47,22 @@
 
     <label>Пол</label>
     <input type="radio"
-           id="male-gender-choice"
-           name="contact"
+           id="male-sex-choice"
+           name="sex"
            value="male">
-    <label for="male-gender-choice">мужской</label>
+    <label for="male-sex-choice">мужской</label>
 
     <input type="radio"
-           id="female-gender-choice"
-           name="contact"
+           id="female-sex-choice"
+           name="sex"
            value="female">
-    <label for="female-gender-choice">женский</label>
+    <label for="female-sex-choice">женский</label>
 
     <input type="radio"
-           id="other-gender-choice"
-           name="contact"
+           id="other-sex-choice"
+           name="sex"
            value="other">
-    <label for="other-gender-choice">другое</label>
+    <label for="other-sex-choice">другое</label>
 
     <br>
 
@@ -154,6 +154,23 @@
     <th>Вес</th>
     <th>Начало абонемента</th>
     <th>Окончание абонемента</th>
+
+    <h2>Продлить абонемент</h2>
+    <form action="http://localhost:8080/client/update" method="post">
+      <label for="client_id_update">ID клиента:</label>
+      <input type="number"
+             name="client_id_update"
+             id="client_id_update">
+      <br>
+      <label for="subscription_end_update">Новая дата абонемента:</label>
+      <input type="date"
+             name="subscription_end_update"
+             id="subscription_end_update">
+      <br>
+      <input type="submit"
+             value="Продлить"
+             id="client_id_update_submit">
+    </form>
 
     {{ range .UnsubscribedClients }}
     <tr>

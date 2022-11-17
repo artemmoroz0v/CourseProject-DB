@@ -1,8 +1,8 @@
 package server
 
-import s "DB/app/model"
+import "DB/app/model"
 
-func InsertNewClient(newClient s.Client) error {
+func InsertNewClient(newClient model.Client) error {
 	_, err := db.Exec(`
 		INSERT INTO Client 
 		    (client_second_name, client_name, client_third_name, sex, 
@@ -15,14 +15,14 @@ func InsertNewClient(newClient s.Client) error {
 	return err
 }
 
-func SelectClients() ([]s.Client, error) {
+func SelectClients() ([]model.Client, error) {
 	rows, err := db.Query(`SELECT * FROM Client`)
 	if err != nil {
 		return nil, err
 	}
-	var clients []s.Client
+	var clients []model.Client
 	for rows.Next() {
-		temp := s.Client{}
+		temp := model.Client{}
 		err = rows.Scan(&temp.SubscriptionID, &temp.ClientSecondName,
 			&temp.ClientName, &temp.ClientThirdName, &temp.Sex,
 			&temp.Birthdate, &temp.Height, &temp.Weight,
@@ -30,6 +30,9 @@ func SelectClients() ([]s.Client, error) {
 		if err != nil {
 			return nil, err
 		}
+		temp.Birthdate = temp.Birthdate[:10]
+		temp.SubscriptionBegin = temp.SubscriptionBegin[:10]
+		temp.SubscriptionEnd = temp.SubscriptionEnd[:10]
 		clients = append(clients, temp)
 	}
 	err = rows.Close()
@@ -39,7 +42,7 @@ func SelectClients() ([]s.Client, error) {
 	return clients, nil
 }
 
-func SelectUnsubscribedClients() ([]s.Client, error) {
+func SelectUnsubscribedClients() ([]model.Client, error) {
 	rows, err := db.Query(`
 		SELECT * 
 		FROM Client 
@@ -47,9 +50,9 @@ func SelectUnsubscribedClients() ([]s.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	var clients []s.Client
+	var clients []model.Client
 	for rows.Next() {
-		temp := s.Client{}
+		temp := model.Client{}
 		err = rows.Scan(&temp.SubscriptionID, &temp.ClientSecondName,
 			&temp.ClientName, &temp.ClientThirdName, &temp.Sex,
 			&temp.Birthdate, &temp.Height, &temp.Weight,
@@ -57,6 +60,9 @@ func SelectUnsubscribedClients() ([]s.Client, error) {
 		if err != nil {
 			return nil, err
 		}
+		temp.Birthdate = temp.Birthdate[:10]
+		temp.SubscriptionBegin = temp.SubscriptionBegin[:10]
+		temp.SubscriptionEnd = temp.SubscriptionEnd[:10]
 		clients = append(clients, temp)
 	}
 	err = rows.Close()
@@ -64,4 +70,13 @@ func SelectUnsubscribedClients() ([]s.Client, error) {
 		return nil, err
 	}
 	return clients, nil
+}
+
+func UpdateSubscription(id int, date string) error {
+	_, err := db.Exec(`
+		UPDATE client
+		SET subscription_end = $1
+		WHERE subscription_id = $2`,
+		date, id)
+	return err
 }

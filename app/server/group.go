@@ -1,8 +1,8 @@
 package server
 
-import s "DB/app/model"
+import "DB/app/model"
 
-func InsertNewGroup(newGroup s.Group) error {
+func InsertNewGroup(newGroup model.Group) error {
 	_, err := db.Exec(`
 		INSERT INTO FC_Group 
 		    (group_id, program_id, notes, trainer_id, clients_amount) 
@@ -12,7 +12,7 @@ func InsertNewGroup(newGroup s.Group) error {
 	return err
 }
 
-func SelectGroupList(number int) ([]s.Client, error) {
+func SelectGroupList(number int) ([]model.Client, error) {
 	rows, err := db.Query(`
 		SELECT subscription_id, client_second_name, client_name, 
 		       client_third_name, sex, birthdate, height, weight, 
@@ -23,9 +23,9 @@ func SelectGroupList(number int) ([]s.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	var clients []s.Client
+	var clients []model.Client
 	for rows.Next() {
-		temp := s.Client{}
+		temp := model.Client{}
 		err = rows.Scan(&temp.SubscriptionID, &temp.ClientSecondName,
 			&temp.ClientName, &temp.ClientThirdName, &temp.Sex, &temp.Birthdate,
 			&temp.Height, &temp.Weight, &temp.SubscriptionBegin,
@@ -33,6 +33,9 @@ func SelectGroupList(number int) ([]s.Client, error) {
 		if err != nil {
 			return nil, err
 		}
+		temp.Birthdate = temp.Birthdate[:10]
+		temp.SubscriptionBegin = temp.SubscriptionBegin[:10]
+		temp.SubscriptionEnd = temp.SubscriptionEnd[:10]
 		clients = append(clients, temp)
 	}
 	err = rows.Close()
@@ -42,14 +45,14 @@ func SelectGroupList(number int) ([]s.Client, error) {
 	return clients, nil
 }
 
-func SelectGroupsList() ([]s.Group, error) {
+func SelectGroupsList() ([]model.Group, error) {
 	rows, err := db.Query(`SELECT * FROM FC_Group`)
 	if err != nil {
 		return nil, err
 	}
-	var groups []s.Group
+	var groups []model.Group
 	for rows.Next() {
-		temp := s.Group{}
+		temp := model.Group{}
 		err = rows.Scan(&temp.GroupID, &temp.ProgramID, &temp.Notes,
 			&temp.TrainerID, &temp.ClientsAmount)
 		if err != nil {
@@ -62,4 +65,12 @@ func SelectGroupsList() ([]s.Group, error) {
 		return nil, err
 	}
 	return groups, nil
+}
+
+func InsertClientIntoGroup(clientID int, groupID int) error {
+	_, err := db.Exec(`
+		INSERT INTO group_client (group_id, subscription_id)
+		VALUES ($1, $2)`,
+		groupID, clientID)
+	return err
 }
