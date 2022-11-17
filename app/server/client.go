@@ -72,7 +72,7 @@ func SelectUnsubscribedClients() ([]model.Client, error) {
 	return clients, nil
 }
 
-func UpdateSubscription(id int, date string) error {
+func UpdateClientSubscription(id int, date string) error {
 	_, err := db.Exec(`
 		UPDATE client
 		SET subscription_end = $1

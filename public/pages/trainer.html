@@ -15,13 +15,12 @@
   <h1>Управление тренерами</h1>
 
   <h2>Добавление тренера</h2>
-  <form action="http://localhost:8080/trainer/post" method="post">
+  <form action="http://localhost:8080/trainer/insert" method="post">
 
     <label for="trainer_second_name">Фамилия</label>
     <input type="text"
            name="trainer_second_name"
            id="trainer_second_name"
-           class="add_trainer"
            maxlength="50">
 
     <br>
@@ -30,7 +29,6 @@
     <input type="text"
            name="trainer_name"
            id="trainer_name"
-           class="add_trainer"
            maxlength="50">
 
     <br>
@@ -39,7 +37,6 @@
     <input type="text"
            name="trainer_third_name"
            id="trainer_third_name"
-           class="add_trainer"
            maxlength="50">
 
     <br>
@@ -48,15 +45,13 @@
     <input type="text"
            name="trainer_phone"
            id="trainer_phone"
-           class="add_trainer"
            maxlength="20">
 
     <br>
 
     <input type="submit"
            value="Добавить тренера"
-           id="trainer_submit"
-           class="add_trainer">
+           id="trainer_submit">
            
   </form>
 

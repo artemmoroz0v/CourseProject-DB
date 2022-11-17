@@ -11,15 +11,20 @@ import (
 
 func routes(r *httprouter.Router) {
 	r.ServeFiles("/public/*filepath", http.Dir("/public"))
+
 	r.GET("/", controller.StartPage)
-	r.GET("/trainers", controller.SelectTrainers)
-	r.GET("/clients", controller.SelectClients)
-	r.GET("/groups", controller.SelectGroups)
-	r.POST("/trainer/post", controller.InsertTrainer)
-	r.POST("/client/post", controller.InsertClient)
-	r.POST("/group/choose", controller.SelectGroup)
-	r.POST("/client/update", controller.UpdateSubscription)
-	r.POST("/group/append", controller.InsertClientIntoGroup)
+
+	r.GET("/client", controller.SelectClients)
+	r.POST("/client/insert", controller.InsertClient)
+	r.POST("/client/update/subscription", controller.UpdateClientSubscription)
+
+	r.GET("/trainer", controller.SelectTrainers)
+	r.POST("/trainer/insert", controller.InsertTrainer)
+
+	r.GET("/group", controller.SelectGroups)
+	r.POST("/group/select", controller.SelectGroup)
+	r.POST("/group/client/insert", controller.InsertClientIntoGroup)
+	r.POST("/group/client/delete", controller.DeleteClientFromGroup)
 	//r.POST("/group/post", controller.PostGroup)
 }
 

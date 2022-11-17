@@ -16,13 +16,12 @@
   <h1>Управление клиентами</h1>
 
   <h2>Добавление клиента</h2>
-  <form action="http://localhost:8080/client/post" method="post">
+  <form action="http://localhost:8080/client/insert" method="post">
 
     <label for="client_second_name">Фамилия</label>
     <input type="text"
            name="client_second_name"
            id="client_second_name"
-           class="add_client"
            maxlength="50">
 
     <br>
@@ -31,7 +30,6 @@
     <input type="text"
            name="client_name"
            id="client_name"
-           class="add_client"
            maxlength="50">
 
     <br>
@@ -40,7 +38,6 @@
     <input type="text"
            name="client_third_name"
            id="client_third_name"
-           class="add_client"
            maxlength="50">
 
     <br>
@@ -49,52 +46,48 @@
     <input type="radio"
            id="male-sex-choice"
            name="sex"
-           value="male">
+           value="мужской">
     <label for="male-sex-choice">мужской</label>
 
     <input type="radio"
            id="female-sex-choice"
            name="sex"
-           value="female">
+           value="женский">
     <label for="female-sex-choice">женский</label>
 
     <input type="radio"
            id="other-sex-choice"
            name="sex"
-           value="other">
-    <label for="other-sex-choice">другое</label>
+           value="другой">
+    <label for="other-sex-choice">другой</label>
 
     <br>
 
     <label for="birthdate">Дата рождения</label>
     <input type="date"
            name="birthdate"
-           id="birthdate"
-           class="add_client">
+           id="birthdate">
 
     <br>
 
     <label for="height">Рост</label>
     <input type="number"
            name="height"
-           id="height"
-           class="add_client">
+           id="height">
 
     <br>
 
     <label for="weight">Вес</label>
     <input type="number"
            name="weight"
-           id="weight"
-           class="add_client">
+           id="weight">
 
     <br>
 
     <label for="subscription_begin">Начало подписки</label>
     <input type="date"
            name="subscription_begin"
-           id="subscription_begin"
-           class="add_client">
+           id="subscription_begin">
 
     <br>
 
@@ -156,7 +149,7 @@
     <th>Окончание абонемента</th>
 
     <h2>Продлить абонемент</h2>
-    <form action="http://localhost:8080/client/update" method="post">
+    <form action="http://localhost:8080/client/update/subscription" method="post">
       <label for="client_id_update">ID клиента:</label>
       <input type="number"
              name="client_id_update"

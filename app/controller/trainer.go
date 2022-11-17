@@ -5,7 +5,6 @@ import (
 	"DB/app/server"
 	"github.com/julienschmidt/httprouter"
 	"html/template"
-	"log"
 	"net/http"
 	"path/filepath"
 )
@@ -16,7 +15,7 @@ func SelectTrainers(w http.ResponseWriter, r *http.Request, p httprouter.Params)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	path := filepath.Join("public", "pages", "trainers.html")
+	path := filepath.Join("public", "pages", "trainer.html")
 	tmpl, err := template.ParseFiles(path)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -37,6 +36,7 @@ func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	newTrainer.TrainerPhone = r.FormValue("trainer_phone")
 	err := server.InsertNewTrainer(newTrainer)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 }

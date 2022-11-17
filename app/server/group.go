@@ -74,3 +74,11 @@ func InsertClientIntoGroup(clientID int, groupID int) error {
 		groupID, clientID)
 	return err
 }
+
+func DeleteClientFromGroup(clientID int, groupID int) error {
+	_, err := db.Exec(`
+		DELETE FROM group_client
+		WHERE group_id = $1 AND subscription_id = $2`,
+		groupID, clientID)
+	return err
+}

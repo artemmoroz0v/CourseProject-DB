@@ -16,12 +16,11 @@
   <h1>Управление группами</h1>
 
   <h2>Добавление группы</h2>
-  <form action="http://localhost:8080/group/post" method="post">
+  <form action="http://localhost:8080/group/insert" method="post">
     <p>
       <label for="group_program_list">Программа</label>
       <select name="program_list"
-              required id="group_program_list"
-              class="add_group">
+              required id="group_program_list">
         <option></option>
         <option>Танцы</option>
         <option>Тяжёлая атлетика</option>
@@ -83,7 +82,7 @@
   </table>
 
   <h2>Список группы</h2>
-  <form action="http://localhost:8080/group/choose" method="post">
+  <form action="http://localhost:8080/group/select" method="post">
     <label for="group_choose">Вывести группу</label>
     <input type="text"
            name="group_choose"
@@ -122,16 +121,31 @@
   </table>
 
   <h2>Добавление клиента в группу</h2>
-  <form action="http://localhost:8080/group/append" method="post">
-    <label for="client_id">ID добавляемого клиента</label>
+  <form action="http://localhost:8080/group/client/insert" method="post">
+    <label for="client_append_id">ID добавляемого клиента</label>
     <input type="number"
-           name="client_id"
-           id="client_id">
+           name="client_append_id"
+           id="client_append_id">
     <br>
     <label for="group_append">ID группы</label>
     <input type="number"
            name="group_append"
            id="group_append">
+    <input type="submit"
+           value="Подтвердить">
+  </form>
+
+  <h2>Удаление клиента из группы</h2>
+  <form action="http://localhost:8080/group/client/delete" method="post">
+    <label for="client_remove_id">ID удаляемого клиента</label>
+    <input type="number"
+           name="client_remove_id"
+           id="client_remove_id">
+    <br>
+    <label for="group_remove">ID группы</label>
+    <input type="number"
+           name="group_remove"
+           id="group_remove">
     <input type="submit"
            value="Подтвердить">
   </form>

@@ -5,7 +5,6 @@ import (
 	"DB/app/server"
 	"github.com/julienschmidt/httprouter"
 	"html/template"
-	"log"
 	"net/http"
 	"path/filepath"
 	"strconv"
@@ -25,7 +24,7 @@ func SelectClients(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 		clients,
 		unsubscribedClients,
 	}
-	path := filepath.Join("public", "pages", "clients.html")
+	path := filepath.Join("public", "pages", "client.html")
 	tmpl, err := template.ParseFiles(path)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -51,11 +50,12 @@ func InsertClient(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	newClient.SubscriptionEnd = r.FormValue("subscription_end")
 	err := server.InsertNewClient(newClient)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 }
 
-func UpdateSubscription(w http.ResponseWriter, r *http.Request,
+func UpdateClientSubscription(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("client_id_update"))
 	if err != nil {
@@ -63,7 +63,7 @@ func UpdateSubscription(w http.ResponseWriter, r *http.Request,
 		return
 	}
 	date := r.FormValue("subscription_end_update")
-	err = server.UpdateSubscription(id, date)
+	err = server.UpdateClientSubscription(id, date)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
