@@ -17,14 +17,18 @@ func routes(r *httprouter.Router) {
 	r.GET("/client", controller.SelectClients)
 	r.POST("/client/insert", controller.InsertClient)
 	r.POST("/client/update/subscription", controller.UpdateClientSubscription)
+	r.POST("/client/update/height&weight", controller.UpdateHeightAndWeight)
+	r.POST("/client/delete", controller.DeleteClient)
 
 	r.GET("/trainer", controller.SelectTrainers)
 	r.POST("/trainer/insert", controller.InsertTrainer)
+	r.POST("/trainer/delete", controller.DeleteTrainer)
 
 	r.GET("/group", controller.SelectGroups)
 	r.POST("/group/select", controller.SelectGroup)
 	r.POST("/group/client/insert", controller.InsertClientIntoGroup)
 	r.POST("/group/client/delete", controller.DeleteClientFromGroup)
+	r.POST("/group/delete", controller.DeleteGroup)
 	//r.POST("/group/post", controller.PostGroup)
 }
 

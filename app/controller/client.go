@@ -69,3 +69,43 @@ func UpdateClientSubscription(w http.ResponseWriter, r *http.Request,
 		return
 	}
 }
+
+func UpdateHeightAndWeight(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	id, err := strconv.Atoi(r.FormValue("client_id_update_hw"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	newHeight, err :=
+		strconv.ParseFloat(r.FormValue("client_params_update_height"), 64)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	newWeight, err :=
+		strconv.ParseFloat(r.FormValue("client_params_update_weight"), 64)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	err = server.UpdateHeightAndWeight(id, newHeight, newWeight)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}
+
+func DeleteClient(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	id, err := strconv.Atoi(r.FormValue("client_id_delete"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	err = server.DeleteClient(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}

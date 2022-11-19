@@ -4,148 +4,177 @@
 <html lang="ru">
 
 <head>
-       <meta charset="UTF-8">
-       <link rel="stylesheet" href="/public/styles/main.css">
-       <title>Fitness Club Admin Page</title>
+  <meta charset="UTF-8">
+  <!--  <link rel="stylesheet" href="/public/styles/main.css">-->
+  <title>Fitness Club Admin Page</title>
 </head>
 
 <body>
-       <h1>Управление клиентами</h1>
+<h1>Управление клиентами</h1>
 
-       <h2>Добавление клиента</h2>
-       <form action="http://localhost:8080/client/insert" method="post">
+<h2>Добавление клиента</h2>
+<form action="http://localhost:8080/client/insert" method="post">
 
-              <label for="client_second_name">Фамилия</label>
-              <input type="text" name="client_second_name" id="client_second_name" maxlength="50">
+  <label for="client_second_name">Фамилия</label>
+  <input type="text" name="client_second_name" id="client_second_name"
+       maxlength="50">
 
-              <br>
+  <br>
 
-              <label for="client_name">Имя</label>
-              <input type="text" name="client_name" id="client_name" maxlength="50">
+  <label for="client_name">Имя</label>
+  <input type="text" name="client_name" id="client_name" maxlength="50">
 
-              <br>
+  <br>
 
-              <label for="client_third_name">Отчество</label>
-              <input type="text" name="client_third_name" id="client_third_name" maxlength="50">
+  <label for="client_third_name">Отчество</label>
+  <input type="text" name="client_third_name" id="client_third_name"
+       maxlength="50">
 
-              <br>
+  <br>
 
-              <label>Пол</label>
-              <input type="radio" id="male-sex-choice" name="sex" value="мужской">
-              <label for="male-sex-choice">мужской</label>
+  <label>Пол</label>
+  <input type="radio" id="male-sex-choice" name="sex" value="мужской">
+  <label for="male-sex-choice">мужской</label>
 
-              <input type="radio" id="female-sex-choice" name="sex" value="женский">
-              <label for="female-sex-choice">женский</label>
+  <input type="radio" id="female-sex-choice" name="sex" value="женский">
+  <label for="female-sex-choice">женский</label>
 
-              <input type="radio" id="other-sex-choice" name="sex" value="другой">
-              <label for="other-sex-choice">другой</label>
+  <input type="radio" id="other-sex-choice" name="sex" value="другой">
+  <label for="other-sex-choice">другой</label>
 
-              <br>
+  <br>
 
-              <label for="birthdate">Дата рождения</label>
-              <input type="date" name="birthdate" id="birthdate">
+  <label for="birthdate">Дата рождения</label>
+  <input type="date" name="birthdate" id="birthdate">
 
-              <br>
+  <br>
 
-              <label for="height">Рост</label>
-              <input type="number" name="height" id="height">
+  <label for="height">Рост</label>
+  <input type="number" name="height" id="height">
 
-              <br>
+  <br>
 
-              <label for="weight">Вес</label>
-              <input type="number" name="weight" id="weight">
+  <label for="weight">Вес</label>
+  <input type="number" name="weight" id="weight">
 
-              <br>
+  <br>
 
-              <label for="subscription_begin">Начало подписки</label>
-              <input type="date" name="subscription_begin" id="subscription_begin">
+  <label for="subscription_begin">Начало подписки</label>
+  <input type="date" name="subscription_begin" id="subscription_begin">
 
-              <br>
+  <br>
 
-              <label for="subscription_end">Окончание подписки</label>
-              <input type="date" name="subscription_end" id="subscription_end" class="add_client">
+  <label for="subscription_end">Окончание подписки</label>
+  <input type="date" name="subscription_end" id="subscription_end"
+       class="add_client">
 
-              <br>
+  <br>
 
-              <input type="submit" value="Добавить клиента" id="client_submit" class="add_client">
+  <input type="submit" value="Добавить клиента" id="client_submit"
+       class="add_client">
 
-       </form>
+</form>
 
-       <h2>Список клиентов</h2>
-       <table class="table">
-              <th>ID</th>
-              <th>Фамилия</th>
-              <th>Имя</th>
-              <th>Отчество</th>
-              <th>Пол</th>
-              <th>Дата рождения</th>
-              <th>Рост</th>
-              <th>Вес</th>
-              <th>Начало абонемента</th>
-              <th>Окончание абонемента</th>
+<h2>Список клиентов</h2>
+<table class="table">
+  <th>ID</th>
+  <th>Фамилия</th>
+  <th>Имя</th>
+  <th>Отчество</th>
+  <th>Пол</th>
+  <th>Дата рождения</th>
+  <th>Рост</th>
+  <th>Вес</th>
+  <th>Начало абонемента</th>
+  <th>Окончание абонемента</th>
 
-              {{ range .Clients }}
-              <tr>
-                     <td>{{ .SubscriptionID }}</td>
-                     <td>{{ .ClientSecondName }}</td>
-                     <td>{{ .ClientName }}</td>
-                     <td>{{ .ClientThirdName }}</td>
-                     <td>{{ .Sex }}</td>
-                     <td>{{ .Birthdate }}</td>
-                     <td>{{ .Height }}</td>
-                     <td>{{ .Weight }}</td>
-                     <td>{{ .SubscriptionBegin }}</td>
-                     <td>{{ .SubscriptionEnd }}</td>
-              </tr>
-              {{ end }}
-       </table>
+  {{ range .Clients }}
+  <tr>
+    <td>{{ .SubscriptionID }}</td>
+    <td>{{ .ClientSecondName }}</td>
+    <td>{{ .ClientName }}</td>
+    <td>{{ .ClientThirdName }}</td>
+    <td>{{ .Sex }}</td>
+    <td>{{ .Birthdate }}</td>
+    <td>{{ .Height }}</td>
+    <td>{{ .Weight }}</td>
+    <td>{{ .SubscriptionBegin }}</td>
+    <td>{{ .SubscriptionEnd }}</td>
+  </tr>
+  {{ end }}
+</table>
 
-       <h2>Список клиентов c истёкшим абонементом</h2>
-       <table class="table">
-              <th>id</th>
-              <th>Фамилия</th>
-              <th>Имя</th>
-              <th>Отчество</th>
-              <th>Пол</th>
-              <th>Дата рождения</th>
-              <th>Рост</th>
-              <th>Вес</th>
-              <th>Начало абонемента</th>
-              <th>Окончание абонемента</th>
+<h2>Список клиентов c истёкшим абонементом</h2>
+<table class="table">
+  <th>id</th>
+  <th>Фамилия</th>
+  <th>Имя</th>
+  <th>Отчество</th>
+  <th>Пол</th>
+  <th>Дата рождения</th>
+  <th>Рост</th>
+  <th>Вес</th>
+  <th>Начало абонемента</th>
+  <th>Окончание абонемента</th>
 
-              {{ range .UnsubscribedClients }}
-              <tr>
-                     <td>{{ .SubscriptionID }}</td>
-                     <td>{{ .ClientSecondName }}</td>
-                     <td>{{ .ClientName }}</td>
-                     <td>{{ .ClientThirdName }}</td>
-                     <td>{{ .Sex }}</td>
-                     <td>{{ .Birthdate }}</td>
-                     <td>{{ .Height }}</td>
-                     <td>{{ .Weight }}</td>
-                     <td>{{ .SubscriptionBegin }}</td>
-                     <td>{{ .SubscriptionEnd }}</td>
-              </tr>
-              {{ end }}
-       </table>
+  {{ range .UnsubscribedClients }}
+  <tr>
+    <td>{{ .SubscriptionID }}</td>
+    <td>{{ .ClientSecondName }}</td>
+    <td>{{ .ClientName }}</td>
+    <td>{{ .ClientThirdName }}</td>
+    <td>{{ .Sex }}</td>
+    <td>{{ .Birthdate }}</td>
+    <td>{{ .Height }}</td>
+    <td>{{ .Weight }}</td>
+    <td>{{ .SubscriptionBegin }}</td>
+    <td>{{ .SubscriptionEnd }}</td>
+  </tr>
+  {{ end }}
+</table>
 
-       <h2>Продлить абонемент</h2>
-       <form action="http://localhost:8080/client/update/subscription" method="post">
-              <label for="client_id_update">ID клиента:</label>
-              <input type="number" name="client_id_update" id="client_id_update">
-              <br>
-              <label for="subscription_end_update">Новая дата абонемента:</label>
-              <input type="date" name="subscription_end_update" id="subscription_end_update">
-              <br>
-              <input type="submit" value="Продлить" id="client_id_update_submit">
-       </form>
+<h2>Продлить абонемент</h2>
+<form action="http://localhost:8080/client/update/subscription" method="post">
+  <label for="client_id_update">ID клиента:</label>
+  <input type="number" name="client_id_update" id="client_id_update">
+  <br>
+  <label for="subscription_end_update">Новая дата абонемента:</label>
+  <input type="date" name="subscription_end_update"
+       id="subscription_end_update">
+  <br>
+  <input type="submit" value="Продлить" id="client_id_update_submit">
+</form>
 
-       <h2>Удалить клиента</h2>
-       <form action="" method="delete">
-              <label for="client_id_delete">ID клиента:</label>
-              <input type="number" name="client_id_delete" id="client_id_delete">
-              <input type="submit" value="Удалить" id="client_id_delete_submit">
-       </form>
+<h2>Изменить рост/вес</h2>
+<form action="http://localhost:8080/client/update/height&weight" method="post">
+  <label for="client_id_update_hw">ID клиента</label>
+  <input type="number"
+       name="client_id_update_hw"
+       id="client_id_update_hw">
+  <br>
+  <label for="client_params_update_height">Новый рост</label>
+  <input type="text"
+       name="client_params_update_height"
+       id="client_params_update_height">
+  <br>
+  <label for="client_params_update_weight">Новый вес</label>
+  <input type="text"
+       name="client_params_update_weight"
+       id="client_params_update_weight">
+  <br>
+  <input type="submit" value="Подтвердить" id="client_update_hw">
+</form>
+
+<h2>Удалить клиента</h2>
+<form action="http://localhost:8080/client/delete" method="post">
+  <label for="client_id_delete">ID клиента:</label>
+  <input type="number"
+         name="client_id_delete"
+         id="client_id_delete">
+  <input type="submit"
+         value="Удалить"
+         id="client_id_delete_submit">
+</form>
 </body>
 
 </html>

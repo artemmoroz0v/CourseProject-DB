@@ -82,3 +82,11 @@ func DeleteClientFromGroup(clientID int, groupID int) error {
 		groupID, clientID)
 	return err
 }
+
+func DeleteGroup(id int) error {
+	_, err := db.Exec(`
+		DELETE FROM FC_Group
+		WHERE (group_id = $1)`,
+		id)
+	return err
+}

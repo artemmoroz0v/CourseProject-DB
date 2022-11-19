@@ -136,3 +136,16 @@ func DeleteClientFromGroup(w http.ResponseWriter, r *http.Request,
 		return
 	}
 }
+
+func DeleteGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	id, err := strconv.Atoi(r.FormValue("group_id_delete"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	err = server.DeleteGroup(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}

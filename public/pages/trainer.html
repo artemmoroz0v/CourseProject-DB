@@ -16,26 +16,40 @@
   <form action="http://localhost:8080/trainer/insert" method="post">
 
     <label for="trainer_second_name">Фамилия</label>
-    <input type="text" name="trainer_second_name" id="trainer_second_name" maxlength="50">
+    <input type="text"
+           name="trainer_second_name"
+           id="trainer_second_name"
+           maxlength="50">
 
     <br>
 
     <label for="trainer_name">Имя</label>
-    <input type="text" name="trainer_name" id="trainer_name" maxlength="50">
+    <input type="text"
+           name="trainer_name"
+           id="trainer_name"
+           maxlength="50">
 
     <br>
 
     <label for="trainer_third_name">Отчество</label>
-    <input type="text" name="trainer_third_name" id="trainer_third_name" maxlength="50">
+    <input type="text"
+           name="trainer_third_name"
+           id="trainer_third_name"
+           maxlength="50">
 
     <br>
 
     <label for="trainer_phone">Телефон</label>
-    <input type="text" name="trainer_phone" id="trainer_phone" maxlength="20">
+    <input type="text"
+           name="trainer_phone"
+           id="trainer_phone"
+           maxlength="20">
 
     <br>
 
-    <input type="submit" value="Добавить тренера" id="trainer_submit">
+    <input type="submit"
+           value="Добавить тренера"
+           id="trainer_submit">
 
   </form>
 
@@ -59,10 +73,14 @@
   </table>
 
   <h2>Удалить тренера</h2>
-  <form action="" method="delete">
+  <form action="http://localhost:8080/trainer/delete" method="post">
     <label for="trainer_id_delete">ID клиента:</label>
-    <input type="number" name="trainer_id_delete" id="trainer_id_delete">
-    <input type="submit" value="Удалить" id="trainer_id_delete_submit">
+    <input type="number"
+           name="trainer_id_delete"
+           id="trainer_id_delete">
+    <input type="submit"
+           value="Удалить"
+           id="trainer_id_delete_submit">
   </form>
 
 </body>

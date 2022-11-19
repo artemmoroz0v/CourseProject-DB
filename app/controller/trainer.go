@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"net/http"
 	"path/filepath"
+	"strconv"
 )
 
 func SelectTrainers(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -35,6 +36,20 @@ func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	newTrainer.TrainerThirdName = r.FormValue("trainer_third_name")
 	newTrainer.TrainerPhone = r.FormValue("trainer_phone")
 	err := server.InsertNewTrainer(newTrainer)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}
+
+func DeleteTrainer(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	id, err := strconv.Atoi(r.FormValue("trainer_id_delete"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	err = server.DeleteTrainer(id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

@@ -1,8 +1,8 @@
 package server
 
-import s "DB/app/model"
+import "DB/app/model"
 
-func InsertNewTrainer(newTrainer s.Trainer) error {
+func InsertNewTrainer(newTrainer model.Trainer) error {
 	_, err := db.Exec(`
 		INSERT INTO Trainer 
 		    (trainer_second_name, trainer_name, 
@@ -14,14 +14,14 @@ func InsertNewTrainer(newTrainer s.Trainer) error {
 	return err
 }
 
-func SelectTrainersList() ([]s.Trainer, error) {
+func SelectTrainersList() ([]model.Trainer, error) {
 	rows, err := db.Query(`SELECT * FROM Trainer`)
 	if err != nil {
 		return nil, err
 	}
-	var trainers []s.Trainer
+	var trainers []model.Trainer
 	for rows.Next() {
-		temp := s.Trainer{}
+		var temp model.Trainer
 		err = rows.Scan(&temp.TrainerID, &temp.TrainerSecondName,
 			&temp.TrainerName, &temp.TrainerThirdName, &temp.TrainerPhone)
 		if err != nil {
@@ -34,4 +34,12 @@ func SelectTrainersList() ([]s.Trainer, error) {
 		return nil, err
 	}
 	return trainers, nil
+}
+
+func DeleteTrainer(id int) error {
+	_, err := db.Exec(`
+		DELETE FROM Trainer
+		WHERE (trainer_id = $1)`,
+		id)
+	return err
 }

@@ -22,7 +22,7 @@ func SelectClients() ([]model.Client, error) {
 	}
 	var clients []model.Client
 	for rows.Next() {
-		temp := model.Client{}
+		var temp model.Client
 		err = rows.Scan(&temp.SubscriptionID, &temp.ClientSecondName,
 			&temp.ClientName, &temp.ClientThirdName, &temp.Sex,
 			&temp.Birthdate, &temp.Height, &temp.Weight,
@@ -78,5 +78,46 @@ func UpdateClientSubscription(id int, date string) error {
 		SET subscription_end = $1
 		WHERE subscription_id = $2`,
 		date, id)
+	return err
+}
+
+func UpdateHeightAndWeight(id int, height float64, weight float64) error {
+	var err error
+	if height == 0 && weight != 0 {
+		_, err = db.Exec(`
+		UPDATE Client
+		SET weight = $1 WHERE
+		(subscription_id = $2)`,
+			weight, id)
+	} else if weight == 0 && height != 0 {
+		_, err = db.Exec(`
+		UPDATE Client
+		SET height = $1 WHERE
+		(subscription_id = $2)`,
+			height, id)
+	} else {
+		_, err = db.Exec(`
+		UPDATE Client
+		SET height = $1,
+		weight = $2 WHERE
+		(subscription_id = $3)`,
+			height, weight, id)
+	}
+	return err
+}
+
+func DeleteClient(id int) error {
+	_, err := db.Exec(`
+		DELETE FROM group_client
+		WHERE (subscription_id = $1)`,
+		id)
+
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec(`
+		DELETE FROM Client
+		WHERE (subscription_id = $1)`,
+		id)
 	return err
 }
