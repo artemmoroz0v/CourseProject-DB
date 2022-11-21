@@ -39,15 +39,15 @@ func SelectClients(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 
 func InsertClient(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var newClient model.Client
-	newClient.ClientSecondName = r.FormValue("client_second_name")
-	newClient.ClientName = r.FormValue("client_name")
-	newClient.ClientThirdName = r.FormValue("client_third_name")
-	newClient.Sex = r.FormValue("sex")
-	newClient.Birthdate = r.FormValue("birthdate")
-	newClient.Height, _ = strconv.ParseFloat(r.FormValue("height"), 64)
-	newClient.Weight, _ = strconv.ParseFloat(r.FormValue("weight"), 64)
-	newClient.SubscriptionBegin = r.FormValue("subscription_begin")
-	newClient.SubscriptionEnd = r.FormValue("subscription_end")
+	newClient.ClientSecondName = r.FormValue("insert_second_name")
+	newClient.ClientName = r.FormValue("insert_name")
+	newClient.ClientThirdName = r.FormValue("insert_third_name")
+	newClient.Sex = r.FormValue("insert_sex")
+	newClient.Birthdate = r.FormValue("insert_birthdate")
+	newClient.Height, _ = strconv.ParseFloat(r.FormValue("insert_height"), 64)
+	newClient.Weight, _ = strconv.ParseFloat(r.FormValue("insert_weight"), 64)
+	newClient.SubscriptionBegin = r.FormValue("insert_subscription_begin")
+	newClient.SubscriptionEnd = r.FormValue("insert_subscription_end")
 	err := server.InsertNewClient(newClient)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -57,12 +57,12 @@ func InsertClient(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 
 func UpdateClientSubscription(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
-	id, err := strconv.Atoi(r.FormValue("client_id_update"))
+	id, err := strconv.Atoi(r.FormValue("update_subscription_id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	date := r.FormValue("subscription_end_update")
+	date := r.FormValue("update_subscription_subscription_end")
 	err = server.UpdateClientSubscription(id, date)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -72,19 +72,19 @@ func UpdateClientSubscription(w http.ResponseWriter, r *http.Request,
 
 func UpdateHeightAndWeight(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
-	id, err := strconv.Atoi(r.FormValue("client_id_update_hw"))
+	id, err := strconv.Atoi(r.FormValue("update_height&weight_id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	newHeight, err :=
-		strconv.ParseFloat(r.FormValue("client_params_update_height"), 64)
+		strconv.ParseFloat(r.FormValue("update_height&weight_height"), 64)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	newWeight, err :=
-		strconv.ParseFloat(r.FormValue("client_params_update_weight"), 64)
+		strconv.ParseFloat(r.FormValue("update_height&weight_weight"), 64)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -98,7 +98,7 @@ func UpdateHeightAndWeight(w http.ResponseWriter, r *http.Request,
 
 func DeleteClient(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
-	id, err := strconv.Atoi(r.FormValue("client_id_delete"))
+	id, err := strconv.Atoi(r.FormValue("delete_id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

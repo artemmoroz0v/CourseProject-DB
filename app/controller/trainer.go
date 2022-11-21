@@ -31,10 +31,10 @@ func SelectTrainers(w http.ResponseWriter, r *http.Request, p httprouter.Params)
 
 func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var newTrainer model.Trainer
-	newTrainer.TrainerSecondName = r.FormValue("trainer_second_name")
-	newTrainer.TrainerName = r.FormValue("trainer_name")
-	newTrainer.TrainerThirdName = r.FormValue("trainer_third_name")
-	newTrainer.TrainerPhone = r.FormValue("trainer_phone")
+	newTrainer.TrainerSecondName = r.FormValue("insert_second_name")
+	newTrainer.TrainerName = r.FormValue("insert_name")
+	newTrainer.TrainerThirdName = r.FormValue("insert_third_name")
+	newTrainer.TrainerPhone = r.FormValue("insert_phone")
 	err := server.InsertNewTrainer(newTrainer)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -44,7 +44,7 @@ func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 
 func DeleteTrainer(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
-	id, err := strconv.Atoi(r.FormValue("trainer_id_delete"))
+	id, err := strconv.Atoi(r.FormValue("delete_id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

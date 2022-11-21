@@ -25,11 +25,11 @@ func routes(r *httprouter.Router) {
 	r.POST("/trainer/delete", controller.DeleteTrainer)
 
 	r.GET("/group", controller.SelectGroups)
+	r.POST("/group/insert", controller.InsertGroup)
 	r.POST("/group/select", controller.SelectGroup)
 	r.POST("/group/client/insert", controller.InsertClientIntoGroup)
 	r.POST("/group/client/delete", controller.DeleteClientFromGroup)
 	r.POST("/group/delete", controller.DeleteGroup)
-	//r.POST("/group/post", controller.PostGroup)
 }
 
 func main() {

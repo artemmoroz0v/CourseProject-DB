@@ -15,42 +15,47 @@
   <h2>Добавление группы</h2>
   <form action="http://localhost:8080/group/insert" method="post">
 
-    <label for="group_program_list">Программа</label>
-    <select name="program_list" required id="group_program_list">
-      <option></option>
-      <option>Танцы</option>
-      <option>Тяжёлая атлетика</option>
-      <option>Кроссфит</option>
-      <option>Бассейн</option>
-      <option>Кардиотренировка</option>
-      <option>Боевые искусства</option>
-      <option>Игровые программы</option>
-      <option>Детский фитнес</option>
+    <label>Программа</label>
+    <select name="insert_program_id">
+      <option value="1" selected>Танцы</option>
+      <option value="2">Тяжёлая атлетика</option>
+      <option value="3">Кроссфит</option>
+      <option value="4">Бассейн</option>
+      <option value="5">Кардиотренировка</option>
+      <option value="6">Боевые искусства</option>
+      <option value="7">Игровые программы</option>
+      <option value="8">Детский фитнес</option>
     </select>
 
     <br>
 
-    <label for="group_note">Заметки</label>
-    <input type="text" name="notes" id="group_note" maxlength="255">
+    <label>Заметки</label>
+    <input type="text"
+           name="insert_notes"
+           maxlength="255">
 
     <br>
 
-    <label for="group_trainer_id">Тренер</label>
-    <input type="number" name="trainer" id="group_trainer_id">
+    <label>Тренер</label>
+    <input type="number"
+           name="insert_trainer_id"
+           placeholder="ID тренера">
 
     <br>
 
-    <label for="group_clients_amount">Максимальное количество клиентов</label>
-    <input type="number" name="clients_amount" id="group_clients_amount">
+    <label>Максимальное количество клиентов</label>
+    <input type="number"
+           name="insert_clients_amount">
 
     <br>
 
-    <input type="submit" value="Добавить группу" id="group_submit">
+    <input type="submit"
+           value="Добавить">
 
   </form>
 
   <h2>Список групп</h2>
-  <table class="table">
+  <table>
     <th>ID группы</th>
     <th>ID программы</th>
     <th>Заметки</th>
@@ -70,12 +75,20 @@
 
   <h2>Список группы</h2>
   <form action="http://localhost:8080/group/select" method="post">
-    <label for="group_choose">Вывести группу</label>
-    <input type="text" name="group_choose" id="group_choose" placeholder="ID группы">
-    <input type="submit" value="Подтвердить">
+
+    <label>Вывести группу</label>
+    <input type="number"
+           name="select_group_id"
+           placeholder="ID группы">
+
+    <br>
+
+    <input type="submit"
+           value="Подтвердить">
+
   </form>
 
-  <table class="table">
+  <table>
     <th>ID</th>
     <th>Фамилия</th>
     <th>Имя</th>
@@ -105,28 +118,56 @@
 
   <h2>Добавление клиента в группу</h2>
   <form action="http://localhost:8080/group/client/insert" method="post">
-    <label for="client_append_id">ID добавляемого клиента</label>
-    <input type="number" name="client_append_id" id="client_append_id">
+
+    <label>ID добавляемого клиента</label>
+    <input type="number"
+           name="client_insert_client_id">
+
     <br>
-    <label for="group_append">ID группы</label>
-    <input type="number" name="group_append" id="group_append">
-    <input type="submit" value="Подтвердить">
+
+    <label>ID группы</label>
+    <input type="number"
+           name="client_insert_group_id">
+
+    <br>
+
+    <input type="submit"
+           value="Подтвердить">
+
   </form>
 
   <h2>Удаление клиента из группы</h2>
   <form action="http://localhost:8080/group/client/delete" method="post">
-    <label for="client_remove_id">ID удаляемого клиента</label>
-    <input type="number" name="client_remove_id" id="client_remove_id">
+
+    <label>ID удаляемого клиента</label>
+    <input type="number"
+           name="client_delete_client_id">
+
     <br>
-    <label for="group_remove">ID группы</label>
-    <input type="number" name="group_remove" id="group_remove">
-    <input type="submit" value="Подтвердить">
+
+    <label>ID группы</label>
+    <input type="number"
+           name="client_delete_group_id">
+
+    <br>
+
+    <input type="submit"
+           value="Подтвердить">
+
   </form>
+
   <h2>Удалить группу</h2>
   <form action="http://localhost:8080/group/delete" method="post">
-    <label for="group_id_delete">ID клиента:</label>
-    <input type="number" name="group_id_delete" id="group_id_delete">
-    <input type="submit" value="Удалить" id="group_id_delete_submit">
+
+    <label>ID группы:</label>
+    <input type="number"
+           name="delete_group_id">
+
+    <br>
+
+    <input type="submit"
+           value="Удалить">
+
   </form>
 
 </body>
