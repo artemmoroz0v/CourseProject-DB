@@ -53,7 +53,8 @@
   <h2>Список расписаний</h2>
   <table>
     <th>ID группы</th>
-    <th>ID времени</th>
+    <th>День</th>
+    <th>Время</th>
     {{ range .Groups }}
     <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №3. -->
     <tr>
@@ -146,10 +147,36 @@
 
   <h2>Удалить Расписание</h2>
   <!-- В формах надо добавить эндпоинт. Мне не дали тз, какой. Матвей, я тобой не доволен №10. -->
-  <form action="http://localhost:8080/" method="post">
+  <form action="http://localhost:8080/..." method="delete">
 
-    <label>ID расписание:</label>
-    <input type="number" name="delete_timetable_id">
+    <label>Группа</label>
+    <select name="insert_group_id">
+      <!-- <option value="1" selected>Танцы</option> -->
+      <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №11. -->
+    </select>
+
+    <br>
+
+    <label>День недели</label>
+    <select name="insert_day">
+      <option value="1" selected>Понедельник</option>
+      <option value="2" selected>Вторник</option>
+      <option value="3" selected>Среда</option>
+      <option value="4" selected>Четверг</option>
+      <option value="5" selected>Пятница</option>
+      <option value="6" selected>Суббота</option>
+      <option value="7" selected>Воскресенье</option>
+    </select>
+
+    <br>
+
+    <label>Время начала</label>
+    <select name="insert_time">
+      <option value="1" selected>13:00</option>
+      <option value="2" selected>14:45</option>
+      <option value="3" selected>16:30</option>
+      <option value="4" selected>18:15</option>
+    </select>
 
     <br>
 
