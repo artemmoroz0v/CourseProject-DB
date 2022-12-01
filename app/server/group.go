@@ -38,8 +38,7 @@ func SelectGroupList(number int) ([]model.Client, error) {
 		temp.SubscriptionEnd = temp.SubscriptionEnd[:10]
 		clients = append(clients, temp)
 	}
-	err = rows.Close()
-	if err != nil {
+	if err = rows.Close(); err != nil {
 		return nil, err
 	}
 	return clients, nil
@@ -60,8 +59,7 @@ func SelectGroupsList() ([]model.Group, error) {
 		}
 		groups = append(groups, temp)
 	}
-	err = rows.Close()
-	if err != nil {
+	if err = rows.Close(); err != nil {
 		return nil, err
 	}
 	return groups, nil

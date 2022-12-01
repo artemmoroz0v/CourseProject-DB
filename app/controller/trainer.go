@@ -22,8 +22,7 @@ func SelectTrainers(w http.ResponseWriter, r *http.Request, p httprouter.Params)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = tmpl.ExecuteTemplate(w, "trainers", trainers)
-	if err != nil {
+	if err = tmpl.ExecuteTemplate(w, "trainers", trainers); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -35,8 +34,8 @@ func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	newTrainer.TrainerName = r.FormValue("insert_name")
 	newTrainer.TrainerThirdName = r.FormValue("insert_third_name")
 	newTrainer.TrainerPhone = r.FormValue("insert_phone")
-	err := server.InsertNewTrainer(newTrainer)
-	if err != nil {
+
+	if err := server.InsertNewTrainer(newTrainer); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -49,8 +48,7 @@ func DeleteTrainer(w http.ResponseWriter, r *http.Request,
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.DeleteTrainer(id)
-	if err != nil {
+	if err = server.DeleteTrainer(id); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}

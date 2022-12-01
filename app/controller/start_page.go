@@ -14,8 +14,7 @@ func StartPage(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = tmpl.Execute(w, nil)
-	if err != nil {
+	if err = tmpl.Execute(w, nil); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}

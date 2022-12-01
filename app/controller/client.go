@@ -30,8 +30,7 @@ func SelectClients(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = tmpl.ExecuteTemplate(w, "data", data)
-	if err != nil {
+	if err = tmpl.ExecuteTemplate(w, "data", data); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -48,8 +47,7 @@ func InsertClient(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	newClient.Weight, _ = strconv.ParseFloat(r.FormValue("insert_weight"), 64)
 	newClient.SubscriptionBegin = r.FormValue("insert_subscription_begin")
 	newClient.SubscriptionEnd = r.FormValue("insert_subscription_end")
-	err := server.InsertNewClient(newClient)
-	if err != nil {
+	if err := server.InsertNewClient(newClient); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -63,8 +61,7 @@ func UpdateClientSubscription(w http.ResponseWriter, r *http.Request,
 		return
 	}
 	date := r.FormValue("update_subscription_subscription_end")
-	err = server.UpdateClientSubscription(id, date)
-	if err != nil {
+	if err = server.UpdateClientSubscription(id, date); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -89,8 +86,7 @@ func UpdateHeightAndWeight(w http.ResponseWriter, r *http.Request,
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.UpdateHeightAndWeight(id, newHeight, newWeight)
-	if err != nil {
+	if err = server.UpdateHeightAndWeight(id, newHeight, newWeight); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -103,8 +99,7 @@ func DeleteClient(w http.ResponseWriter, r *http.Request,
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.DeleteClient(id)
-	if err != nil {
+	if err = server.DeleteClient(id); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}

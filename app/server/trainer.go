@@ -29,8 +29,7 @@ func SelectTrainersList() ([]model.Trainer, error) {
 		}
 		trainers = append(trainers, temp)
 	}
-	err = rows.Close()
-	if err != nil {
+	if err = rows.Close(); err != nil {
 		return nil, err
 	}
 	return trainers, nil

@@ -35,8 +35,7 @@ func SelectClients() ([]model.Client, error) {
 		temp.SubscriptionEnd = temp.SubscriptionEnd[:10]
 		clients = append(clients, temp)
 	}
-	err = rows.Close()
-	if err != nil {
+	if err = rows.Close(); err != nil {
 		return nil, err
 	}
 	return clients, nil
@@ -65,8 +64,7 @@ func SelectUnsubscribedClients() ([]model.Client, error) {
 		temp.SubscriptionEnd = temp.SubscriptionEnd[:10]
 		clients = append(clients, temp)
 	}
-	err = rows.Close()
-	if err != nil {
+	if err = rows.Close(); err != nil {
 		return nil, err
 	}
 	return clients, nil
@@ -111,7 +109,6 @@ func DeleteClient(id int) error {
 		DELETE FROM group_client
 		WHERE (subscription_id = $1)`,
 		id)
-
 	if err != nil {
 		return err
 	}

@@ -36,8 +36,7 @@ func SelectGroups(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = tmpl.ExecuteTemplate(w, "data", data)
-	if err != nil {
+	if err = tmpl.ExecuteTemplate(w, "data", data); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -70,8 +69,7 @@ func InsertGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.InsertNewGroup(newGroup)
-	if err != nil {
+	if err = server.InsertNewGroup(newGroup); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -89,8 +87,7 @@ func InsertClientIntoGroup(w http.ResponseWriter, r *http.Request,
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.InsertClientIntoGroup(clientID, groupID)
-	if err != nil {
+	if err = server.InsertClientIntoGroup(clientID, groupID); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -108,8 +105,7 @@ func DeleteClientFromGroup(w http.ResponseWriter, r *http.Request,
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.DeleteClientFromGroup(clientID, groupID)
-	if err != nil {
+	if err = server.DeleteClientFromGroup(clientID, groupID); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -121,8 +117,7 @@ func DeleteGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.DeleteGroup(id)
-	if err != nil {
+	if err = server.DeleteGroup(id); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}

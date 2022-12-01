@@ -1,10 +1,11 @@
+{{ define "data" }}
+
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--  <link rel="stylesheet" href="/public/styles/main.css">-->
   <title>Fitness Club Admin Page</title>
 </head>
 
@@ -12,19 +13,16 @@
   <h1>Управление расписанием</h1>
 
   <h2>Добавление расписания</h2>
-  <!-- В формах надо добавить эндпоинт. Мне не дали тз, какой. Матвей, я тобой не доволен №1. -->
-  <form action="http://localhost:8080/..." method="post">
+  <form action="http://localhost:8080/timetable/insert" method="post">
 
     <label>Группа</label>
-    <select name="insert_group_id">
-      <!-- <option value="1" selected>Танцы</option> -->
-      <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №2. -->
-    </select>
+    <input type="number"
+           name="insert_group_id">
 
     <br>
 
     <label>День недели</label>
-    <select name="insert_day">
+    <select name="insert_weekday">
       <option value="1" selected>Понедельник</option>
       <option value="2" selected>Вторник</option>
       <option value="3" selected>Среда</option>
@@ -37,11 +35,12 @@
     <br>
 
     <label>Время начала</label>
-    <select name="insert_time">
-      <option value="1" selected>13:00</option>
-      <option value="2" selected>14:45</option>
-      <option value="3" selected>16:30</option>
-      <option value="4" selected>18:15</option>
+    <select name="insert_training_time">
+      <option value="13:00:00" selected>13:00</option>
+      <option value="14:45:00" selected>14:45</option>
+      <option value="16:30:00" selected>16:30</option>
+      <option value="18:15:00" selected>18:15</option>
+      <option value="20:00:00" selected>20:00</option>
     </select>
 
     <br>
@@ -49,31 +48,19 @@
     <input type="submit" value="Добавить">
 
   </form>
-  <br>
-  <h2>Список расписаний</h2>
-  <table>
-    <th>ID группы</th>
-    <th>День</th>
-    <th>Время</th>
-    {{ range .Groups }}
-    <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №3. -->
-    <tr>
-      <td>{{ .GroupID }}</td>
-      <td>{{ .TimeID }}</td>
-    </tr>
-    {{ end }}
-  </table>
 
   <h2>Расписание группы</h2>
-  <!-- В формах надо добавить эндпоинт. Мне не дали тз, какой. Матвей, я тобой не доволен №4. -->
-  <form action="http://localhost:8080/..." method="post">
+  <form action="http://localhost:8080/timetable/select/by_group" method="post">
 
     <label>Вывести группу</label>
-    <input type="number" name="select_group_id" placeholder="ID группы">
+    <input type="number"
+           name="select_group_id"
+           placeholder="ID группы">
 
     <br>
 
-    <input type="submit" value="Подтвердить">
+    <input type="submit"
+           value="Подтвердить">
 
   </form>
 
@@ -81,26 +68,28 @@
     <th>ID</th>
     <th>День недели</th>
     <th>Время</th>
-    <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №5. -->
-    {{ range .Group }}
+
+    {{ range .ByGroup }}
     <tr>
-      <td>{{ .SubscriptionID }}</td>
-      <td>{{ .ClientSecondName }}</td>
-      <td>{{ .ClientName }}</td>
+      <td>{{ .GroupID }}</td>
+      <td>{{ .Weekday }}</td>
+      <td>{{ .TrainingTime }}</td>
     </tr>
     {{ end }}
   </table>
 
   <h2>Расписание Программы</h2>
-  <!-- В формах надо добавить эндпоинт. Мне не дали тз, какой. Матвей, я тобой не доволен №6. -->
-  <form action="http://localhost:8080/..." method="post">
+  <form action="http://localhost:8080/timetable/select/by_program" method="post">
 
     <label>Вывести группу</label>
-    <input type="number" name="select_program_id" placeholder="ID программы">
+    <input type="number"
+           name="select_program_id"
+           placeholder="ID группы">
 
     <br>
 
-    <input type="submit" value="Подтвердить">
+    <input type="submit"
+           value="Подтвердить">
 
   </form>
 
@@ -108,22 +97,23 @@
     <th>ID</th>
     <th>День недели</th>
     <th>Время</th>
-    <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №7. -->
-    {{ range .Group }}
+
+    {{ range .ByProgram }}
     <tr>
-      <td>{{ .SubscriptionID }}</td>
-      <td>{{ .ClientSecondName }}</td>
-      <td>{{ .ClientName }}</td>
+      <td>{{ .GroupID }}</td>
+      <td>{{ .Weekday }}</td>
+      <td>{{ .TrainingTime }}</td>
     </tr>
     {{ end }}
   </table>
 
   <h2>Расписание Тренера</h2>
-  <!-- В формах надо добавить эндпоинт. Мне не дали тз, какой. Матвей, я тобой не доволен №8. -->
-  <form action="http://localhost:8080/..." method="post">
+  <form action="http://localhost:8080/timetable/select/by_trainer" method="post">
 
     <label>Вывести группу</label>
-    <input type="number" name="select_trainer_id" placeholder="ID тренера">
+    <input type="number"
+           name="select_trainer_id"
+           placeholder="ID тренера">
 
     <br>
 
@@ -135,30 +125,27 @@
     <th>ID</th>
     <th>День недели</th>
     <th>Время</th>
-    <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №9. -->
-    {{ range .Group }}
+
+    {{ range .ByTrainer }}
     <tr>
-      <td>{{ .SubscriptionID }}</td>
-      <td>{{ .ClientSecondName }}</td>
-      <td>{{ .ClientName }}</td>
+      <td>{{ .GroupID }}</td>
+      <td>{{ .Weekday }}</td>
+      <td>{{ .TrainingTime }}</td>
     </tr>
     {{ end }}
   </table>
 
   <h2>Удалить Расписание</h2>
-  <!-- В формах надо добавить эндпоинт. Мне не дали тз, какой. Матвей, я тобой не доволен №10. -->
-  <form action="http://localhost:8080/..." method="delete">
+  <form action="http://localhost:8080/timetable/delete" method="post">
 
     <label>Группа</label>
-    <select name="insert_group_id">
-      <!-- <option value="1" selected>Танцы</option> -->
-      <!-- В шаблонах надо добавить переменные, задаваемые в бэки. Мне не дали тз, какие. Матвей, я тобой не доволен №11. -->
-    </select>
+    <input type="number"
+           name="insert_group_id">
 
     <br>
 
     <label>День недели</label>
-    <select name="insert_day">
+    <select name="insert_weekday">
       <option value="1" selected>Понедельник</option>
       <option value="2" selected>Вторник</option>
       <option value="3" selected>Среда</option>
@@ -171,18 +158,22 @@
     <br>
 
     <label>Время начала</label>
-    <select name="insert_time">
-      <option value="1" selected>13:00</option>
-      <option value="2" selected>14:45</option>
-      <option value="3" selected>16:30</option>
-      <option value="4" selected>18:15</option>
+    <select name="insert_training_time">
+      <option value="13:00:00" selected>13:00</option>
+      <option value="14:45:00" selected>14:45</option>
+      <option value="16:30:00" selected>16:30</option>
+      <option value="18:15:00" selected>18:15</option>
+      <option value="20:00:00" selected>20:00</option>
     </select>
 
     <br>
 
-    <input type="submit" value="Удалить">
+    <input type="submit"
+           value="Подтвердить">
 
   </form>
+
 </body>
 
 </html>
+{{ end }}

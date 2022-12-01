@@ -1,7 +1,7 @@
 package controller
 
 import (
-	s "DB/app/model"
+	"DB/app/model"
 	"DB/app/server"
 	"html/template"
 	"net/http"
@@ -11,87 +11,91 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func SelectTimeTableForEachGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	groupID, _ := strconv.Atoi(r.FormValue("select_group_id"))
-	timetables, err := server.TimeTableEachGroup(groupID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	path := filepath.Join("public", "pages", "timetable.html")
-	tmpl, err := template.ParseFiles(path)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	err = tmpl.ExecuteTemplate(w, "timetable", timetables)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-}
+var timetableByGroup = 0
+var timetableByProgram = 0
+var timetableByTrainer = 0
 
-func SelectTimeTableForEachProgram(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	programID, _ := strconv.Atoi(r.FormValue("select_program_id"))
-	timetables, err := server.TimeTableEachProgram(programID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	path := filepath.Join("public", "pages", "timetable.html")
-	tmpl, err := template.ParseFiles(path)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	err = tmpl.ExecuteTemplate(w, "timetable", timetables)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-}
-
-func SelectTimeTableForEachTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	trainerID, _ := strconv.Atoi(r.FormValue("select_trainer_id"))
-	timetables, err := server.TimeTableEachTrainer(trainerID)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	path := filepath.Join("public", "pages", "timetable.html")
-	tmpl, err := template.ParseFiles(path)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	err = tmpl.ExecuteTemplate(w, "timetable", timetables)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-}
-
-func InsertProgramInTimeTable(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	newTimeTable := s.Timetable{}
-	newTimeTable.GroupID, _ = strconv.Atoi(r.FormValue("insert_group_id"))
-	newTimeTable.Weekday = r.FormValue("insert_weekday")
-	newTimeTable.TrainingTime = r.FormValue("insert_training_time")
-	err := server.InsertInTimeTable(newTimeTable)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-}
-
-func DeleteProgramFromTimeTable(w http.ResponseWriter, r *http.Request,
+func SelectTimetable(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
-	id, err := strconv.Atoi(r.FormValue("delete_group_id"))
+	byGroup, err := server.SelectTimetableByGroup(timetableByGroup)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	err = server.DeleteFromTimeTable(id)
+	byProgram, err := server.SelectTimetableByProgram(timetableByProgram)
 	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	byTrainer, err := server.SelectTimetableByTrainer(timetableByTrainer)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	data := struct {
+		ByGroup   []model.Timetable
+		ByProgram []model.Timetable
+		ByTrainer []model.Timetable
+	}{
+		byGroup,
+		byProgram,
+		byTrainer,
+	}
+	path := filepath.Join("public", "pages", "timetable.html")
+	tmpl, err := template.ParseFiles(path)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	if err = tmpl.ExecuteTemplate(w, "data", data); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}
+
+func SelectTimetableByGroup(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	tempStr := r.FormValue("select_group_id")
+	if tempStr != "" {
+		timetableByGroup, _ = strconv.Atoi(tempStr)
+	}
+}
+
+func SelectTimetableByProgram(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	tempStr := r.FormValue("select_program_id")
+	if tempStr != "" {
+		timetableByProgram, _ = strconv.Atoi(tempStr)
+	}
+}
+
+func SelectTimetableByTrainer(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	tempStr := r.FormValue("select_trainer_id")
+	if tempStr != "" {
+		timetableByTrainer, _ = strconv.Atoi(tempStr)
+	}
+}
+
+func InsertTimetable(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	var newTimetable model.Timetable
+	newTimetable.GroupID, _ = strconv.Atoi(r.FormValue("insert_group_id"))
+	newTimetable.Weekday = r.FormValue("insert_weekday")
+	newTimetable.TrainingTime = r.FormValue("insert_training_time")
+	if err := server.InsertTimetable(newTimetable); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}
+
+func DeleteTimetable(w http.ResponseWriter, r *http.Request,
+	p httprouter.Params) {
+	var newTimetable model.Timetable
+	newTimetable.GroupID, _ = strconv.Atoi(r.FormValue("insert_group_id"))
+	newTimetable.Weekday = r.FormValue("insert_weekday")
+	newTimetable.TrainingTime = r.FormValue("insert_training_time")
+	if err := server.DeleteTimetable(newTimetable); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}

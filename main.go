@@ -30,6 +30,13 @@ func routes(r *httprouter.Router) {
 	r.POST("/group/client/insert", controller.InsertClientIntoGroup)
 	r.POST("/group/client/delete", controller.DeleteClientFromGroup)
 	r.POST("/group/delete", controller.DeleteGroup)
+
+	r.GET("/timetable", controller.SelectTimetable)
+	r.POST("/timetable/insert", controller.InsertTimetable)
+	r.POST("/timetable/select/by_group", controller.SelectTimetableByGroup)
+	r.POST("/timetable/select/by_program", controller.SelectTimetableByProgram)
+	r.POST("/timetable/select/by_trainer", controller.SelectTimetableByTrainer)
+	r.POST("/timetable/delete", controller.DeleteTimetable)
 }
 
 func main() {

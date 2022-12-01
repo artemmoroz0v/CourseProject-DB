@@ -1,10 +1,8 @@
 package server
 
-import (
-	s "DB/app/model"
-)
+import "DB/app/model"
 
-func TimeTableEachGroup(groupID int) ([]s.Timetable, error) {
+func SelectTimetableByGroup(groupID int) ([]model.Timetable, error) {
 	rows, err := db.Query(`
 	SELECT group_id, weekday, training_time 
 	FROM timetable 
@@ -15,20 +13,23 @@ func TimeTableEachGroup(groupID int) ([]s.Timetable, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
-	timetables := []s.Timetable{}
+	var timetables []model.Timetable
 	for rows.Next() {
-		temp := s.Timetable{}
+		var temp model.Timetable
 		err = rows.Scan(&temp.GroupID, &temp.Weekday, &temp.TrainingTime)
 		if err != nil {
 			return nil, err
 		}
+		temp.TrainingTime = temp.TrainingTime[11:16]
 		timetables = append(timetables, temp)
+	}
+	if err = rows.Close(); err != nil {
+		return nil, err
 	}
 	return timetables, nil
 }
 
-func TimeTableEachProgram(programID int) ([]s.Timetable, error) {
+func SelectTimetableByProgram(programID int) ([]model.Timetable, error) {
 	rows, err := db.Query(`
 	SELECT group_id, weekday, training_time 
 	FROM timetable 
@@ -39,61 +40,79 @@ func TimeTableEachProgram(programID int) ([]s.Timetable, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
-	timetables := []s.Timetable{}
+	var timetables []model.Timetable
 	for rows.Next() {
-		temp := s.Timetable{}
+		var temp model.Timetable
 		err = rows.Scan(&temp.GroupID, &temp.Weekday, &temp.TrainingTime)
 		if err != nil {
 			return nil, err
 		}
+		temp.TrainingTime = temp.TrainingTime[11:16]
 		timetables = append(timetables, temp)
+	}
+	if err = rows.Close(); err != nil {
+		return nil, err
 	}
 	return timetables, nil
 }
 
-func TimeTableEachTrainer(trainerID int) ([]s.Timetable, error) {
+func SelectTimetableByTrainer(trainerID int) ([]model.Timetable, error) {
 	rows, err := db.Query(`
 	SELECT group_id, weekday, training_time 
 	FROM timetable 
-	INNER JOIN times 
-	USING(time_id) 
-	INNER JOIN fc_group
-	USING(group_id)
+		INNER JOIN times USING(time_id) 
+		INNER JOIN fc_group USING(group_id)
 	WHERE trainer_id = $1`,
 		trainerID)
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
-	timetables := []s.Timetable{}
+	var timetables []model.Timetable
 	for rows.Next() {
-		temp := s.Timetable{}
+		var temp model.Timetable
 		err = rows.Scan(&temp.GroupID, &temp.Weekday, &temp.TrainingTime)
 		if err != nil {
 			return nil, err
 		}
+		temp.TrainingTime = temp.TrainingTime[11:16]
 		timetables = append(timetables, temp)
+	}
+	if err = rows.Close(); err != nil {
+		return nil, err
 	}
 	return timetables, nil
 }
 
-func InsertInTimeTable(newTimeTable s.Timetable) error {
+func InsertTimetable(newTimetable model.Timetable) error {
 	_, err := db.Exec(`
-	INSERT INTO timetable (group_id, weekday, training_time) 
-	VALUES ($1, $2, $3)`,
-		newTimeTable.GroupID, newTimeTable.Weekday, newTimeTable.TrainingTime)
+	INSERT INTO timetable (time_id, group_id)
+	VALUES
+		((SELECT time_id
+		 FROM times
+		 WHERE weekday = $2 AND training_time = $3 AND program_id = (
+		     SELECT program_id
+		     FROM fc_group
+		     WHERE fc_group.group_id = $1
+		 )), $1)`,
+		newTimetable.GroupID, newTimetable.Weekday, newTimetable.TrainingTime)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func DeleteFromTimeTable(groupid int) error {
+func DeleteTimetable(newTimetable model.Timetable) error {
 	_, err := db.Exec(`
-	DELETE FROM timetable 
-	WHERE group_id = $1`,
-		groupid)
+	DELETE FROM timetable
+	WHERE time_id = (
+		SELECT time_id
+		FROM times
+		WHERE weekday = $2 AND training_time = $3 AND program_id = (
+		    SELECT program_id
+		    FROM fc_group
+		    WHERE fc_group.group_id = $1
+		 )) AND group_id = $1`,
+		newTimetable.GroupID, newTimetable.Weekday, newTimetable.TrainingTime)
 	if err != nil {
 		return err
 	}
