@@ -43,7 +43,7 @@
 
 ## Схема базы данных
 
-![image](https://github.com/papey08/DB/blob/main/schema/db_scheme.png)
+![image](https://github.com/papey08/DB/blob/main/db_scheme.png)
 
 
 ## Таблицы
