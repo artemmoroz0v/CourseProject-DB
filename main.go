@@ -3,13 +3,15 @@ package main
 import (
 	"DB/app/controller"
 	"DB/app/server"
+	"fmt"
 	"github.com/julienschmidt/httprouter"
 	_ "github.com/lib/pq"
+	"github.com/spf13/viper"
 	"log"
 	"net/http"
 )
 
-func routes(r *httprouter.Router) {
+func Routes(r *httprouter.Router) {
 	r.ServeFiles("/public/*filepath", http.Dir("public"))
 
 	r.GET("/", controller.StartPage)
@@ -39,22 +41,32 @@ func routes(r *httprouter.Router) {
 	r.POST("/timetable/delete", controller.DeleteTimetable)
 }
 
+func InitConfig() error {
+	viper.SetConfigFile("config.yml")
+	return viper.ReadInConfig()
+}
+
 func main() {
-	err := server.OpenBD("user=postgres password=454565 dbname=postgres sslmode=disable")
-	if err != nil {
+	if err := InitConfig(); err != nil {
+		log.Fatal(err)
+	}
+	configStr := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
+		viper.GetString("db.host"), viper.GetString("db.port"),
+		viper.GetString("db.user"), viper.GetString("db.dbname"),
+		viper.GetString("db.password"), viper.GetString("db.sslmode"))
+
+	if err := server.OpenDB(configStr); err != nil {
 		log.Fatal(err)
 		return
 	}
-	defer func() {
-		err = server.CloseDB()
-		if err != nil {
-			return
-		}
-	}()
 	r := httprouter.New()
-	routes(r)
-	err = http.ListenAndServe("localhost:8080", r)
-	if err != nil {
+	Routes(r)
+	if err := http.ListenAndServe(":"+viper.GetString("port"), r); err != nil {
+		log.Fatal(err)
+		return
+	}
+	if err := server.CloseDB(); err != nil {
+		log.Fatal(err)
 		return
 	}
 }

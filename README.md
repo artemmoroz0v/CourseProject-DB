@@ -24,7 +24,7 @@
 - [x] Список всех групп
 - [x] Список одной группы
 - [x] Добавление клиента в группу
-- [x] Удаление клиента из группы
+- [x] Удаление клиента из группы 
 
 ### Расписание
 
@@ -37,13 +37,13 @@
 ## Прочее
 
 - [ ] CSS
-- [ ] Docker
+- [x] Docker
 - [ ] тесты
 
 
 ## Схема базы данных
 
-![image](https://github.com/papey08/DB/blob/main/DBscheme.png)
+![image](https://github.com/papey08/DB/blob/main/schema/db_scheme.png)
 
 
 ## Таблицы

@@ -1,14 +1,15 @@
 package server
 
 import (
-	"database/sql"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
-var db *sql.DB
+var db *sqlx.DB
 
-func OpenBD(configStr string) error {
+func OpenDB(configStr string) error {
 	var err error
-	db, err = sql.Open("postgres", configStr)
+	db, err = sqlx.Open("postgres", configStr)
 	return err
 }
 
