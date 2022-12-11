@@ -1,9 +1,10 @@
-h1, h2 {
+/* h1,
+h2 {
     text-align: center;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+} */
 
-h1 {
+/* h1 {
     margin-bottom: 150px;
 }
 
@@ -25,8 +26,23 @@ button:hover {
     margin-right: 4%;
     height: 100px;
     width: 12%;
-    
+
     position: relative;
     left: 20%;
     right: 16%;
+} */
+
+.forma {
+    width: 30%;
+    float: left;
+}
+
+.table_class {
+    width: 70%;
+    float: left;
+}
+
+body {
+    background-color: rgb(31, 31, 31);
+    color: white
 }

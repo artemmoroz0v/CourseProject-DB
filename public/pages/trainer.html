@@ -4,82 +4,76 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
-  <!--  <link rel="stylesheet" href="/public/styles/main.css">-->
-  <title>Fitness Club Admin Page</title>
+       <meta charset="UTF-8">
+       <link rel="stylesheet" href="../styles/main.css">
+       <title>Fitness Club Admin Page</title>
 </head>
 
 <body>
-  <h1>Управление тренерами</h1>
+       <h1>Управление тренерами</h1>
 
-  <h2>Добавление тренера</h2>
-  <form action="http://localhost:8080/trainer/insert" method="post">
+       <div class="forma">
+              <h2>Добавление тренера</h2>
+              <form action="http://localhost:8080/trainer/insert" method="post">
 
-    <label>Фамилия</label>
-    <input type="text"
-           name="insert_second_name"
-           maxlength="50">
+                     <label>Фамилия</label>
+                     <input type="text" name="insert_second_name" maxlength="50">
 
-    <br>
+                     <br>
 
-    <label>Имя</label>
-    <input type="text"
-           name="insert_name"
-           maxlength="50">
+                     <label>Имя</label>
+                     <input type="text" name="insert_name" maxlength="50">
 
-    <br>
+                     <br>
 
-    <label>Отчество</label>
-    <input type="text"
-           name="insert_third_name"
-           maxlength="50">
+                     <label>Отчество</label>
+                     <input type="text" name="insert_third_name" maxlength="50">
 
-    <br>
+                     <br>
 
-    <label>Телефон</label>
-    <input type="text"
-           name="insert_phone"
-           maxlength="20">
+                     <label>Телефон</label>
+                     <input type="text" name="insert_phone" maxlength="20">
 
-    <br>
+                     <br>
 
-    <input type="submit"
-           value="Добавить">
+                     <input type="submit" value="Добавить">
 
-  </form>
+              </form>
+              <h2>Удалить тренера</h2>
+              <form action="http://localhost:8080/trainer/delete" method="post">
 
-  <h2>Список тренеров</h2>
-  <table class="table">
-    <th>ID</th>
-    <th>Фамилия</th>
-    <th>Имя</th>
-    <th>Отчество</th>
-    <th>Телефон</th>
+                     <label>ID тренера:</label>
+                     <input type="number" name="delete_id">
 
-    {{ range . }}
-    <tr>
-      <td>{{ .TrainerID }}</td>
-      <td>{{ .TrainerSecondName }}</td>
-      <td>{{ .TrainerName }}</td>
-      <td>{{ .TrainerThirdName }}</td>
-      <td>{{ .TrainerPhone }}</td>
-    </tr>
-    {{ end }}
-  </table>
+                     <br>
 
-  <h2>Удалить тренера</h2>
-  <form action="http://localhost:8080/trainer/delete" method="post">
+                     <input type="submit" value="Удалить">
 
-    <label>ID тренера:</label>
-    <input type="number"
-           name="delete_id">
+              </form>
+       </div>
 
-    <br>
+       <div class="table_class">
+              <h2>Список тренеров</h2>
+              <table class="table">
+                     <th>ID</th>
+                     <th>Фамилия</th>
+                     <th>Имя</th>
+                     <th>Отчество</th>
+                     <th>Телефон</th>
 
-    <input type="submit"
-           value="Удалить">
+                     {{ range . }}
+                     <tr>
+                            <td>{{ .TrainerID }}</td>
+                            <td>{{ .TrainerSecondName }}</td>
+                            <td>{{ .TrainerName }}</td>
+                            <td>{{ .TrainerThirdName }}</td>
+                            <td>{{ .TrainerPhone }}</td>
+                     </tr>
+                     {{ end }}
+              </table>
+       </div>
 
-  </form>
+
 
 </body>
 
