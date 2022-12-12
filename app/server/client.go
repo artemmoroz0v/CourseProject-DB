@@ -15,6 +15,8 @@ func InsertNewClient(newClient model.Client) error {
 	return err
 }
 
+//inserting new client in database
+
 func SelectClients() ([]model.Client, error) {
 	rows, err := db.Query(`
 		SELECT * FROM Client
@@ -42,6 +44,8 @@ func SelectClients() ([]model.Client, error) {
 	}
 	return clients, nil
 }
+
+//selecting all clients from database
 
 func SelectUnsubscribedClients() ([]model.Client, error) {
 	rows, err := db.Query(`
@@ -73,6 +77,8 @@ func SelectUnsubscribedClients() ([]model.Client, error) {
 	return clients, nil
 }
 
+//selecting all unsubscribed clients from database
+
 func UpdateClientSubscription(id int, date string) error {
 	_, err := db.Exec(`
 		UPDATE client
@@ -81,6 +87,8 @@ func UpdateClientSubscription(id int, date string) error {
 		date, id)
 	return err
 }
+
+//updating user's subscription by his id
 
 func UpdateHeightAndWeight(id int, height float64, weight float64) error {
 	var err error
@@ -107,6 +115,8 @@ func UpdateHeightAndWeight(id int, height float64, weight float64) error {
 	return err
 }
 
+//updating user's height and weight by his id
+
 func DeleteClient(id int) error {
 	_, err := db.Exec(`
 		DELETE FROM group_client
@@ -121,3 +131,5 @@ func DeleteClient(id int) error {
 		id)
 	return err
 }
+
+//deleting user from database by his id

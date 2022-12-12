@@ -13,6 +13,10 @@ func OpenDB(configStr string) error {
 	return err
 }
 
+//opening database
+
 func CloseDB() error {
 	return db.Close()
 }
+
+//closing database
