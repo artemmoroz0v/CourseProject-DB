@@ -2,6 +2,7 @@ package server
 
 import "DB/app/model"
 
+//inserting new group in database
 func InsertNewGroup(newGroup model.Group) error {
 	_, err := db.Exec(`
 		INSERT INTO FC_Group 
@@ -12,8 +13,7 @@ func InsertNewGroup(newGroup model.Group) error {
 	return err
 }
 
-//inserting new group in database
-
+//selecting group by it's id from database
 func SelectGroupList(number int) ([]model.Client, error) {
 	rows, err := db.Query(`
 		SELECT subscription_id, client_second_name, client_name, 
@@ -47,8 +47,7 @@ func SelectGroupList(number int) ([]model.Client, error) {
 	return clients, nil
 }
 
-//selecting group by it's id from database
-
+//selecting all groups from database
 func SelectGroupsList() ([]model.Group, error) {
 	rows, err := db.Query(`
 		SELECT * FROM FC_Group
@@ -72,8 +71,7 @@ func SelectGroupsList() ([]model.Group, error) {
 	return groups, nil
 }
 
-//selecting all groups from database
-
+//inserting new client in group by ids
 func InsertClientIntoGroup(clientID int, groupID int) error {
 	_, err := db.Exec(`
 		INSERT INTO group_client (group_id, subscription_id)
@@ -82,8 +80,7 @@ func InsertClientIntoGroup(clientID int, groupID int) error {
 	return err
 }
 
-//inserting new client in group by ids
-
+//deleting client from group database
 func DeleteClientFromGroup(clientID int, groupID int) error {
 	_, err := db.Exec(`
 		DELETE FROM group_client
@@ -92,8 +89,7 @@ func DeleteClientFromGroup(clientID int, groupID int) error {
 	return err
 }
 
-//deleting client from group database
-
+//deleting group by it's id from database
 func DeleteGroup(id int) error {
 	_, err := db.Exec(`
 		DELETE FROM FC_Group
@@ -101,5 +97,3 @@ func DeleteGroup(id int) error {
 		id)
 	return err
 }
-
-//deleting group by it's id from database

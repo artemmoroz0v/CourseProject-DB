@@ -7,16 +7,14 @@ import (
 
 var db *sqlx.DB
 
+//opening database
 func OpenDB(configStr string) error {
 	var err error
 	db, err = sqlx.Open("postgres", configStr)
 	return err
 }
 
-//opening database
-
+//closing database
 func CloseDB() error {
 	return db.Close()
 }
-
-//closing database
