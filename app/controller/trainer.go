@@ -34,22 +34,23 @@ func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	newTrainer.TrainerName = r.FormValue("insert_name")
 	newTrainer.TrainerThirdName = r.FormValue("insert_third_name")
 	newTrainer.TrainerPhone = r.FormValue("insert_phone")
-
 	if err := server.InsertNewTrainer(newTrainer); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func DeleteTrainer(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("delete_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	if err = server.DeleteTrainer(id); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }

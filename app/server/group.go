@@ -19,7 +19,8 @@ func SelectGroupList(number int) ([]model.Client, error) {
 		       subscription_begin, subscription_end 
 		FROM Client 
 		    INNER JOIN group_client USING(subscription_id) 
-		WHERE group_id = $1`, number)
+		WHERE group_id = $1
+		ORDER BY subscription_id DESC`, number)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +46,9 @@ func SelectGroupList(number int) ([]model.Client, error) {
 }
 
 func SelectGroupsList() ([]model.Group, error) {
-	rows, err := db.Query(`SELECT * FROM FC_Group`)
+	rows, err := db.Query(`
+		SELECT * FROM FC_Group
+		ORDER BY group_id DESC`)
 	if err != nil {
 		return nil, err
 	}

@@ -1,0 +1,16 @@
+table {
+  font-family: Helvetica, Helvetica, serif;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 5px;
+  background: #141414;
+  color: white;
+}
+th {
+  font-size: 14px;
+  padding: 10px;
+}
+td {
+  background: #2e2e2e;
+  padding: 10px;
+}

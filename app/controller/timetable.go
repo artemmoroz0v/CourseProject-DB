@@ -59,6 +59,7 @@ func SelectTimetableByGroup(w http.ResponseWriter, r *http.Request,
 	if tempStr != "" {
 		timetableByGroup, _ = strconv.Atoi(tempStr)
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func SelectTimetableByProgram(w http.ResponseWriter, r *http.Request,
@@ -67,6 +68,7 @@ func SelectTimetableByProgram(w http.ResponseWriter, r *http.Request,
 	if tempStr != "" {
 		timetableByProgram, _ = strconv.Atoi(tempStr)
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func SelectTimetableByTrainer(w http.ResponseWriter, r *http.Request,
@@ -75,6 +77,7 @@ func SelectTimetableByTrainer(w http.ResponseWriter, r *http.Request,
 	if tempStr != "" {
 		timetableByTrainer, _ = strconv.Atoi(tempStr)
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func InsertTimetable(w http.ResponseWriter, r *http.Request,
@@ -84,9 +87,10 @@ func InsertTimetable(w http.ResponseWriter, r *http.Request,
 	newTimetable.Weekday = r.FormValue("insert_weekday")
 	newTimetable.TrainingTime = r.FormValue("insert_training_time")
 	if err := server.InsertTimetable(newTimetable); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func DeleteTimetable(w http.ResponseWriter, r *http.Request,
@@ -96,7 +100,8 @@ func DeleteTimetable(w http.ResponseWriter, r *http.Request,
 	newTimetable.Weekday = r.FormValue("insert_weekday")
 	newTimetable.TrainingTime = r.FormValue("insert_training_time")
 	if err := server.DeleteTimetable(newTimetable); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }

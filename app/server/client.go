@@ -16,7 +16,9 @@ func InsertNewClient(newClient model.Client) error {
 }
 
 func SelectClients() ([]model.Client, error) {
-	rows, err := db.Query(`SELECT * FROM Client`)
+	rows, err := db.Query(`
+		SELECT * FROM Client
+		ORDER BY subscription_id DESC`)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +47,8 @@ func SelectUnsubscribedClients() ([]model.Client, error) {
 	rows, err := db.Query(`
 		SELECT * 
 		FROM Client 
-		WHERE subscription_end < CURRENT_DATE`)
+		WHERE subscription_end < CURRENT_DATE
+		ORDER BY subscription_id DESC`)
 	if err != nil {
 		return nil, err
 	}

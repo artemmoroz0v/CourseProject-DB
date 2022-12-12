@@ -47,6 +47,7 @@ func SelectGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	if tempStr != "" {
 		selectedGroup, _ = strconv.Atoi(tempStr)
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func InsertGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -60,65 +61,69 @@ func InsertGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	newGroup.Notes = r.FormValue("insert_notes")
 	newGroup.TrainerID, _ = strconv.Atoi(r.FormValue("insert_trainer_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	newGroup.ClientsAmount, err =
 		strconv.Atoi(r.FormValue("insert_clients_amount"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	if err = server.InsertNewGroup(newGroup); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func InsertClientIntoGroup(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	clientID, err := strconv.Atoi(r.FormValue("client_insert_client_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	groupID, err := strconv.Atoi(r.FormValue("client_insert_group_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	if err = server.InsertClientIntoGroup(clientID, groupID); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func DeleteClientFromGroup(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	clientID, err := strconv.Atoi(r.FormValue("client_delete_client_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	groupID, err := strconv.Atoi(r.FormValue("client_delete_group_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	if err = server.DeleteClientFromGroup(clientID, groupID); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }
 
 func DeleteGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("delete_group_id"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
 	if err = server.DeleteGroup(id); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		printAnswer(w, errorRes, err.Error())
 		return
 	}
+	printAnswer(w, successRes, successAns)
 }

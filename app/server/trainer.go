@@ -15,7 +15,9 @@ func InsertNewTrainer(newTrainer model.Trainer) error {
 }
 
 func SelectTrainersList() ([]model.Trainer, error) {
-	rows, err := db.Query(`SELECT * FROM Trainer`)
+	rows, err := db.Query(`
+		SELECT * FROM Trainer
+		ORDER BY trainer_id DESC`)
 	if err != nil {
 		return nil, err
 	}
