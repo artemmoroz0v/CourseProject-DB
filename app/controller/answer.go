@@ -12,6 +12,7 @@ const (
 	successAns = "Операция успешно проведена"
 )
 
+// printAnswer shows page with status of operation
 func printAnswer(w http.ResponseWriter, res string, ans string) {
 	path := filepath.Join("public", "pages", "answer.html")
 	tmpl, err := template.ParseFiles(path)

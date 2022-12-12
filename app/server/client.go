@@ -2,7 +2,7 @@ package server
 
 import "DB/app/model"
 
-//inserting new client in database
+// InsertNewClient inserts new client in database
 func InsertNewClient(newClient model.Client) error {
 	_, err := db.Exec(`
 		INSERT INTO Client 
@@ -16,7 +16,7 @@ func InsertNewClient(newClient model.Client) error {
 	return err
 }
 
-//selecting all clients from database
+// SelectClients returns slice of all clients
 func SelectClients() ([]model.Client, error) {
 	rows, err := db.Query(`
 		SELECT * FROM Client
@@ -45,7 +45,8 @@ func SelectClients() ([]model.Client, error) {
 	return clients, nil
 }
 
-//selecting all unsubscribed clients from database
+// SelectUnsubscribedClients returns slice of clients with
+// expired subscription
 func SelectUnsubscribedClients() ([]model.Client, error) {
 	rows, err := db.Query(`
 		SELECT * 
@@ -76,7 +77,7 @@ func SelectUnsubscribedClients() ([]model.Client, error) {
 	return clients, nil
 }
 
-//updating user's subscription by his id
+// UpdateClientSubscription updates client's subscription by his id
 func UpdateClientSubscription(id int, date string) error {
 	_, err := db.Exec(`
 		UPDATE client
@@ -86,7 +87,7 @@ func UpdateClientSubscription(id int, date string) error {
 	return err
 }
 
-//updating user's height and weight by his id
+// UpdateHeightAndWeight updates client's height and weight by his id
 func UpdateHeightAndWeight(id int, height float64, weight float64) error {
 	var err error
 	if height == 0 && weight != 0 {
@@ -112,7 +113,7 @@ func UpdateHeightAndWeight(id int, height float64, weight float64) error {
 	return err
 }
 
-//deleting user from database by his id
+// DeleteClient deletes client from database by his id
 func DeleteClient(id int) error {
 	_, err := db.Exec(`
 		DELETE FROM group_client

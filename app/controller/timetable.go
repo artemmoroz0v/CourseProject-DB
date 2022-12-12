@@ -11,10 +11,13 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// variables means which timetables will be shown on web page
+
 var timetableByGroup = 0
 var timetableByProgram = 0
 var timetableByTrainer = 0
 
+// SelectTimetable shows web page with filled tables of timetables
 func SelectTimetable(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	byGroup, err := server.SelectTimetableByGroup(timetableByGroup)
@@ -53,6 +56,7 @@ func SelectTimetable(w http.ResponseWriter, r *http.Request,
 	}
 }
 
+// SelectTimetableByGroup sets new value of variable timetableByGroup
 func SelectTimetableByGroup(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	tempStr := r.FormValue("select_group_id")
@@ -62,6 +66,7 @@ func SelectTimetableByGroup(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// SelectTimetableByProgram sets new value of variable timetableByProgram
 func SelectTimetableByProgram(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	tempStr := r.FormValue("select_program_id")
@@ -71,6 +76,7 @@ func SelectTimetableByProgram(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// SelectTimetableByTrainer sets new value of variable timetableByTrainer
 func SelectTimetableByTrainer(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	tempStr := r.FormValue("select_trainer_id")
@@ -80,6 +86,7 @@ func SelectTimetableByTrainer(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// InsertTimetable reads timetable info from form and inserts it into database
 func InsertTimetable(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	var newTimetable model.Timetable
@@ -93,6 +100,7 @@ func InsertTimetable(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// DeleteTimetable reads timetable info from form and deletes it from database
 func DeleteTimetable(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	var newTimetable model.Timetable

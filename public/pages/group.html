@@ -22,14 +22,9 @@
       <br>
       <select name="insert_program_id"
               class="input_field">
-        <option value="1" selected>Танцы</option>
-        <option value="2">Тяжёлая атлетика</option>
-        <option value="3">Кроссфит</option>
-        <option value="4">Бассейн</option>
-        <option value="5">Кардиотренировка</option>
-        <option value="6">Боевые искусства</option>
-        <option value="7">Игровые программы</option>
-        <option value="8">Детский фитнес</option>
+        {{ range .Programs }}
+        <option value={{ .ProgramID }}>{{ .ProgramName }}</option>
+        {{ end }}
       </select>
     </div>
 

@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 )
 
+// StartPage shows main web page
 func StartPage(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	path := filepath.Join("public", "pages", "index.html")
 	tmpl, err := template.ParseFiles(path)

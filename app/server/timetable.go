@@ -2,7 +2,7 @@ package server
 
 import "DB/app/model"
 
-//selecting all timetables from database
+// SelectTimetableByGroup returns timetable of group with id groupID
 func SelectTimetableByGroup(groupID int) ([]model.Timetable, error) {
 	rows, err := db.Query(`
 	SELECT group_id, weekday, training_time 
@@ -30,7 +30,8 @@ func SelectTimetableByGroup(groupID int) ([]model.Timetable, error) {
 	return timetables, nil
 }
 
-//selecting timetable by programID
+// SelectTimetableByProgram returns timetable of groups
+// with program programID
 func SelectTimetableByProgram(programID int) ([]model.Timetable, error) {
 	rows, err := db.Query(`
 	SELECT group_id, weekday, training_time 
@@ -58,7 +59,8 @@ func SelectTimetableByProgram(programID int) ([]model.Timetable, error) {
 	return timetables, nil
 }
 
-//selecting timteable by trainerID
+// SelectTimetableByTrainer returns timetable of groups
+// // with trainer trainerID
 func SelectTimetableByTrainer(trainerID int) ([]model.Timetable, error) {
 	rows, err := db.Query(`
 	SELECT group_id, weekday, training_time 
@@ -86,7 +88,7 @@ func SelectTimetableByTrainer(trainerID int) ([]model.Timetable, error) {
 	return timetables, nil
 }
 
-//inserting new timetable in database
+// InsertTimetable inserts new timetable in database
 func InsertTimetable(newTimetable model.Timetable) error {
 	_, err := db.Exec(`
 	INSERT INTO timetable (time_id, group_id)
@@ -105,7 +107,7 @@ func InsertTimetable(newTimetable model.Timetable) error {
 	return nil
 }
 
-//deleting timetable from database
+// DeleteTimetable deletes timetable from database
 func DeleteTimetable(newTimetable model.Timetable) error {
 	_, err := db.Exec(`
 	DELETE FROM timetable

@@ -10,6 +10,7 @@ import (
 	"strconv"
 )
 
+// SelectClients shows web page with filled tables of clients
 func SelectClients(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	clients, err := server.SelectClients()
 	unsubscribedClients, err := server.SelectUnsubscribedClients()
@@ -36,6 +37,7 @@ func SelectClients(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	}
 }
 
+// InsertClient reads client info from form and inserts it into database
 func InsertClient(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var newClient model.Client
 	newClient.ClientSecondName = r.FormValue("insert_second_name")
@@ -54,6 +56,7 @@ func InsertClient(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	printAnswer(w, successRes, successAns)
 }
 
+// UpdateClientSubscription reads client info from form and updates info
 func UpdateClientSubscription(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("update_subscription_id"))
@@ -69,6 +72,7 @@ func UpdateClientSubscription(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// UpdateHeightAndWeight reads client info from form and updates info
 func UpdateHeightAndWeight(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("update_height&weight_id"))
@@ -95,6 +99,7 @@ func UpdateHeightAndWeight(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// DeleteClient reads client info from form and deletes client from database
 func DeleteClient(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("delete_id"))

@@ -10,9 +10,12 @@ import (
 	"strconv"
 )
 
+// selectedGroup is variable means which group will be shown on web page
 var selectedGroup = 0
 
+// SelectGroups shows web page with filled tables of groups
 func SelectGroups(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	programs, err := server.SelectPrograms()
 	groups, err := server.SelectGroupsList()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -24,9 +27,11 @@ func SelectGroups(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		return
 	}
 	data := struct {
-		Groups []model.Group
-		Group  []model.Client
+		Programs []model.Program
+		Groups   []model.Group
+		Group    []model.Client
 	}{
+		programs,
 		groups,
 		group,
 	}
@@ -42,6 +47,7 @@ func SelectGroups(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	}
 }
 
+// SelectGroup sets new value of variable selectedGroup
 func SelectGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	tempStr := r.FormValue("select_group_id")
 	if tempStr != "" {
@@ -50,6 +56,7 @@ func SelectGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	printAnswer(w, successRes, successAns)
 }
 
+// InsertGroup reads group info from form and inserts it into database
 func InsertGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var newGroup model.Group
 	var err error
@@ -77,6 +84,7 @@ func InsertGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	printAnswer(w, successRes, successAns)
 }
 
+// InsertClientIntoGroup reads info from form and updates database
 func InsertClientIntoGroup(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	clientID, err := strconv.Atoi(r.FormValue("client_insert_client_id"))
@@ -96,6 +104,7 @@ func InsertClientIntoGroup(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// DeleteClientFromGroup reads info from form and updates database
 func DeleteClientFromGroup(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	clientID, err := strconv.Atoi(r.FormValue("client_delete_client_id"))
@@ -115,6 +124,7 @@ func DeleteClientFromGroup(w http.ResponseWriter, r *http.Request,
 	printAnswer(w, successRes, successAns)
 }
 
+// DeleteGroup reads group info from form and deletes client from database
 func DeleteGroup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("delete_group_id"))
 	if err != nil {

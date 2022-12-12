@@ -2,7 +2,7 @@ package server
 
 import "DB/app/model"
 
-//inserting new trainer in database
+// InsertNewTrainer inserts new trainer in database
 func InsertNewTrainer(newTrainer model.Trainer) error {
 	_, err := db.Exec(`
 		INSERT INTO Trainer 
@@ -15,7 +15,7 @@ func InsertNewTrainer(newTrainer model.Trainer) error {
 	return err
 }
 
-//selecting all trainers from database
+// SelectTrainersList returns slice of all trainers from database
 func SelectTrainersList() ([]model.Trainer, error) {
 	rows, err := db.Query(`
 		SELECT * FROM Trainer
@@ -39,7 +39,7 @@ func SelectTrainersList() ([]model.Trainer, error) {
 	return trainers, nil
 }
 
-//deleting trainer from database by his id
+// DeleteTrainer deletes trainer from database by his id
 func DeleteTrainer(id int) error {
 	_, err := db.Exec(`
 		DELETE FROM Trainer

@@ -11,6 +11,7 @@ import (
 	"net/http"
 )
 
+// Routes matches methods with endpoints
 func Routes(r *httprouter.Router) {
 	r.ServeFiles("/public/*filepath", http.Dir("public"))
 
@@ -41,6 +42,7 @@ func Routes(r *httprouter.Router) {
 	r.POST("/timetable/delete", controller.DeleteTimetable)
 }
 
+// InitConfig initialises configuration file
 func InitConfig() error {
 	viper.SetConfigFile("config.yml")
 	return viper.ReadInConfig()

@@ -10,6 +10,7 @@ import (
 	"strconv"
 )
 
+// SelectTrainers shows web page with filled tables of trainers
 func SelectTrainers(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	trainers, err := server.SelectTrainersList()
 	if err != nil {
@@ -28,6 +29,7 @@ func SelectTrainers(w http.ResponseWriter, r *http.Request, p httprouter.Params)
 	}
 }
 
+// InsertTrainer reads trainer info from form and inserts it into database
 func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var newTrainer model.Trainer
 	newTrainer.TrainerSecondName = r.FormValue("insert_second_name")
@@ -41,6 +43,7 @@ func InsertTrainer(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 	printAnswer(w, successRes, successAns)
 }
 
+// DeleteTrainer reads trainer info from form and deletes client from database
 func DeleteTrainer(w http.ResponseWriter, r *http.Request,
 	p httprouter.Params) {
 	id, err := strconv.Atoi(r.FormValue("delete_id"))

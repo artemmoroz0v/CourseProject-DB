@@ -1,5 +1,6 @@
 package model
 
+// Trainer symbolizes trainer of fitness club
 type Trainer struct {
 	TrainerID         int    `json:"trainerID"`
 	TrainerSecondName string `json:"trainerSecondName"`
