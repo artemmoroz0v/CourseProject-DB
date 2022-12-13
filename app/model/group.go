@@ -2,14 +2,14 @@ package model
 
 // Group symbolizes group of fitness club
 type Group struct {
-	GroupID       int    `json:"groupID"`
-	ProgramID     int    `json:"programID"`
-	Notes         string `json:"notes"`
-	TrainerID     int    `json:"trainerID"`
-	ClientsAmount int    `json:"clientsAmount"`
+	GroupID       int
+	ProgramID     int
+	Notes         string
+	TrainerID     int
+	ClientsAmount int
 }
 
 type Program struct {
-	ProgramID   int    `json:"programID"`
-	ProgramName string `json:"programName"`
+	ProgramID   int
+	ProgramName string
 }

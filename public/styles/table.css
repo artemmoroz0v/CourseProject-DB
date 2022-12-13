@@ -2,15 +2,15 @@ table {
   font-family: Helvetica, Helvetica, serif;
   text-align: left;
   border-collapse: separate;
-  border-spacing: 5px;
+  border-spacing: 5pt;
   background: #141414;
   color: white;
 }
 th {
-  font-size: 14px;
-  padding: 10px;
+  font-size: 14pt;
+  padding: 10pt;
 }
 td {
   background: #2e2e2e;
-  padding: 10px;
+  padding: 10pt;
 }
