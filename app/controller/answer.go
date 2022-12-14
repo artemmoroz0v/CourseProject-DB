@@ -9,7 +9,7 @@ import (
 const (
 	successRes = "Успешно"
 	errorRes   = "Ошибка"
-	successAns = "Операция успешно проведена"
+	successAns = "Операция успешно проведена. По возвращении обновите страницу, чтобы увидеть изменения."
 )
 
 // printAnswer shows page with status of operation

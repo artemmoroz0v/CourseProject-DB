@@ -20,6 +20,10 @@ h2, label, table, .submit, .submit_delete, p {
   color: white;
 }
 
+#subscription_end {
+  color: #d0142c;
+}
+
 button, .submit, .submit_delete, #answer_button {
   background-color: #262626;
   color: white;

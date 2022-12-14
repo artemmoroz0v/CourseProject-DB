@@ -59,6 +59,7 @@
              value="Добавить">
 
     </form>
+
     <h2>Расписание группы</h2>
     <form action="http://localhost:8080/timetable/select/by_group" method="post">
 
@@ -76,6 +77,7 @@
              value="Подтвердить">
 
     </form>
+
     <h2>Расписание программы</h2>
     <form action="http://localhost:8080/timetable/select/by_program" method="post">
 
@@ -93,6 +95,7 @@
              value="Подтвердить">
 
     </form>
+
     <h2>Расписание тренера</h2>
     <form action="http://localhost:8080/timetable/select/by_trainer" method="post">
 
@@ -110,6 +113,7 @@
              value="Подтвердить">
 
     </form>
+
     <h2>Удалить Расписание</h2>
     <form action="http://localhost:8080/timetable/delete" method="post">
 
@@ -172,6 +176,9 @@
       {{ end }}
     </table>
 
+    <br>
+    <br>
+
     <h2>Расписание программы</h2>
     <table>
       <th>ID</th>
@@ -187,6 +194,8 @@
       {{ end }}
     </table>
 
+    <br>
+    <br>
 
     <h2>Расписание тренера</h2>
     <table>
@@ -202,9 +211,7 @@
       </tr>
       {{ end }}
     </table>
-
   </div>
-
 </body>
 
 </html>

@@ -7,10 +7,11 @@ table {
   color: white;
 }
 th {
-  font-size: 14pt;
+  font-size: 13pt;
   padding: 10pt;
 }
 td {
+  font-size: 10pt;
   background: #2e2e2e;
   padding: 10pt;
 }
